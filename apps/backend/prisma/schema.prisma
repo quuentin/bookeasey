@@ -1,0 +1,322 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── USERS & AUTH ────────────────────────────────────────
+
+model User {
+  id               String    @id @default(cuid())
+  email            String    @unique
+  passwordHash     String
+  emailVerified    Boolean   @default(false)
+  emailVerifyToken String?
+  resetToken       String?
+  resetTokenExpiry DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  professional  Professional?
+  refreshTokens RefreshToken[]
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+// ─── PROFESSIONAL PROFILE ────────────────────────────────
+
+model Professional {
+  id             String  @id @default(cuid())
+  userId         String  @unique
+  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessName   String
+  slug           String  @unique
+  sector         String
+  description    String?
+  phone          String?
+  address        String?
+  city           String?
+  postalCode     String?
+  country        String  @default("FR")
+  logoUrl        String?
+  coverImageUrl  String?
+  timezone       String  @default("Europe/Paris")
+  customDomain   String? @unique
+  onboardingDone Boolean @default(false)
+  bufferMinutes  Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  services           Service[]
+  calendars          Calendar[]
+  employees          Employee[]
+  appointments       Appointment[]
+  subscription       Subscription?
+  customForms        CustomForm[]
+  notifications      Notification[]
+  googleCalendarSync GoogleCalendarSync?
+
+  @@index([slug])
+  @@map("professionals")
+}
+
+// ─── EMPLOYEES (PREMIUM) ────────────────────────────────
+
+model Employee {
+  id             String       @id @default(cuid())
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  name           String
+  email          String?
+  avatarUrl      String?
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  calendar     Calendar?
+  appointments Appointment[]
+
+  @@index([professionalId])
+  @@map("employees")
+}
+
+// ─── CALENDARS & AVAILABILITY ────────────────────────────
+
+model Calendar {
+  id             String       @id @default(cuid())
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  employeeId     String?      @unique
+  employee       Employee?    @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  name           String
+  isDefault      Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  weeklySchedule WeeklySchedule[]
+  dateOverrides  DateOverride[]
+  appointments   Appointment[]
+
+  @@index([professionalId])
+  @@map("calendars")
+}
+
+model WeeklySchedule {
+  id         String   @id @default(cuid())
+  calendarId String
+  calendar   Calendar @relation(fields: [calendarId], references: [id], onDelete: Cascade)
+  dayOfWeek  Int
+  startTime  String
+  endTime    String
+  isActive   Boolean  @default(true)
+
+  @@unique([calendarId, dayOfWeek])
+  @@map("weekly_schedules")
+}
+
+model DateOverride {
+  id         String   @id @default(cuid())
+  calendarId String
+  calendar   Calendar @relation(fields: [calendarId], references: [id], onDelete: Cascade)
+  date       DateTime @db.Date
+  isBlocked  Boolean  @default(true)
+  startTime  String?
+  endTime    String?
+  reason     String?
+
+  @@unique([calendarId, date])
+  @@index([calendarId, date])
+  @@map("date_overrides")
+}
+
+// ─── SERVICES ────────────────────────────────────────────
+
+model Service {
+  id              String       @id @default(cuid())
+  professionalId  String
+  professional    Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  name            String
+  description     String?
+  durationMinutes Int
+  price           Decimal      @db.Decimal(10, 2)
+  currency        String       @default("EUR")
+  color           String?
+  isActive        Boolean      @default(true)
+  sortOrder       Int          @default(0)
+  customFormId    String?
+  customForm      CustomForm?  @relation(fields: [customFormId], references: [id], onDelete: SetNull)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  appointments Appointment[]
+
+  @@index([professionalId])
+  @@map("services")
+}
+
+// ─── APPOINTMENTS ────────────────────────────────────────
+
+model Appointment {
+  id             String       @id @default(cuid())
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  calendarId     String
+  calendar       Calendar     @relation(fields: [calendarId], references: [id], onDelete: Cascade)
+  serviceId      String
+  service        Service      @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  employeeId     String?
+  employee       Employee?    @relation(fields: [employeeId], references: [id], onDelete: SetNull)
+
+  clientName  String
+  clientEmail String
+  clientPhone String?
+  clientNotes String?
+
+  startTime DateTime
+  endTime   DateTime
+  timezone  String   @default("Europe/Paris")
+
+  status       AppointmentStatus @default(CONFIRMED)
+  cancelledAt  DateTime?
+  cancelReason String?
+
+  paymentStatus   PaymentStatus @default(NONE)
+  paymentAmount   Decimal?      @db.Decimal(10, 2)
+  stripePaymentId String?
+
+  googleEventId String?
+
+  formResponses Json?
+
+  emailReminderSent Boolean @default(false)
+  smsReminderSent   Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([professionalId, startTime])
+  @@index([calendarId, startTime])
+  @@index([clientEmail])
+  @@index([status])
+  @@map("appointments")
+}
+
+enum AppointmentStatus {
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+enum PaymentStatus {
+  NONE
+  PENDING
+  DEPOSIT_PAID
+  FULLY_PAID
+  REFUNDED
+}
+
+// ─── SUBSCRIPTIONS & BILLING ─────────────────────────────
+
+model Subscription {
+  id                 String             @id @default(cuid())
+  professionalId     String             @unique
+  professional       Professional       @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  plan               PlanType           @default(FREE)
+  stripeCustomerId   String?            @unique
+  stripeSubId        String?            @unique
+  status             SubscriptionStatus @default(ACTIVE)
+  currentPeriodStart DateTime?
+  currentPeriodEnd   DateTime?
+  cancelAtPeriodEnd  Boolean            @default(false)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  @@map("subscriptions")
+}
+
+enum PlanType {
+  FREE
+  PREMIUM
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  TRIALING
+}
+
+// ─── NOTIFICATIONS ───────────────────────────────────────
+
+model Notification {
+  id             String       @id @default(cuid())
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  type           String
+  title          String
+  body           String
+  isRead         Boolean      @default(false)
+  metadata       Json?
+  createdAt      DateTime     @default(now())
+
+  @@index([professionalId, isRead])
+  @@index([professionalId, createdAt])
+  @@map("notifications")
+}
+
+// ─── CUSTOM FORMS (PREMIUM) ──────────────────────────────
+
+model CustomForm {
+  id             String       @id @default(cuid())
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  name           String
+  fields         Json
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  services Service[]
+
+  @@index([professionalId])
+  @@map("custom_forms")
+}
+
+// ─── GOOGLE CALENDAR SYNC (PREMIUM) ─────────────────────
+
+model GoogleCalendarSync {
+  id                 String       @id @default(cuid())
+  professionalId     String       @unique
+  professional       Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  googleAccountEmail String
+  accessToken        String
+  refreshToken       String
+  tokenExpiry        DateTime
+  calendarId         String       @default("primary")
+  syncToken          String?
+  channelId          String?
+  channelExpiry      DateTime?
+  lastSyncAt         DateTime?
+  isActive           Boolean      @default(true)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  @@map("google_calendar_syncs")
+}
