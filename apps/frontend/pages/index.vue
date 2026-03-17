@@ -550,7 +550,14 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
             <NuxtLink to="/register" class="hover:text-white transition-colors">S'inscrire</NuxtLink>
           </div>
         </div>
-        <div class="border-t border-slate-800 mt-8 pt-6 text-xs text-slate-500">&copy; {{ new Date().getFullYear() }} BookEasy. Tous droits réservés.</div>
+        <div class="border-t border-slate-800 mt-8 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500">
+          <span>&copy; {{ new Date().getFullYear() }} BookEasy. Tous droits réservés.</span>
+          <div class="flex flex-wrap gap-4">
+            <NuxtLink to="/mentions-legales" class="hover:text-slate-300 transition-colors">Mentions légales</NuxtLink>
+            <NuxtLink to="/cgu" class="hover:text-slate-300 transition-colors">CGU</NuxtLink>
+            <NuxtLink to="/confidentialite" class="hover:text-slate-300 transition-colors">Confidentialité</NuxtLink>
+          </div>
+        </div>
       </div>
     </footer>
   </div>
