@@ -78,12 +78,13 @@ const features = [
 ]
 
 const comparisons = [
+  { feature: 'Tarifs transparents (affichés sur le site)', us: true, them: false },
+  { feature: 'Outil simple, prêt en 5 minutes', us: true, them: false },
   { feature: 'Page vitrine de votre activité', us: true, them: false },
   { feature: 'Services avec tarifs affichés', us: true, them: false },
   { feature: 'Paiement à la réservation', us: true, them: false },
   { feature: 'Réservation sans compte client', us: true, them: false },
-  { feature: 'Inscription en 5 minutes (self-service)', us: true, them: false },
-  { feature: 'Tarifs affichés et transparents', us: true, them: false },
+  { feature: 'Gratuit sans limite de temps', us: true, them: false },
   { feature: 'Multi-employés', us: true, them: true },
   { feature: 'Rappels automatiques', us: true, them: true },
   { feature: 'Sync Google Calendar', us: true, them: true },
@@ -106,7 +107,7 @@ const targetAudiences = [
 
 const faqs = [
   { q: 'C\'est vraiment gratuit ?', a: 'Oui, le plan gratuit est gratuit pour toujours. Il inclut 1 calendrier, 5 services, les rappels email et votre page publique. Aucune carte bancaire demandée.' },
-  { q: 'En quoi c\'est différent de Calendly ou Planity ?', a: 'Calendly est fait pour les réunions en entreprise, Planity pour les gros salons de coiffure avec caisse enregistreuse. BookEasy est fait pour les indépendants de tous les métiers qui veulent une page pro simple avec réservation et paiement intégré, sans complexité et sans appel commercial.' },
+  { q: 'En quoi c\'est différent de Calendly ou Planity ?', a: 'Calendly est fait pour les réunions en entreprise, Planity pour les gros salons avec caisse enregistreuse. Leurs tarifs sont opaques (il faut demander un devis ou passer un appel commercial) et leurs outils sont complexes. BookEasy c\'est l\'inverse : tarifs affichés (0€ ou 12€/mois, point final), un outil simple qui se configure en 5 minutes, pensé pour les indépendants de tous les métiers.' },
   { q: 'Mes clients doivent créer un compte ?', a: 'Non. Ils entrent leur nom, email et téléphone, c\'est tout. Aucune appli à télécharger, aucun mot de passe à retenir.' },
   { q: 'Je peux encaisser des paiements ?', a: 'Oui, avec le plan Premium à 12€/mois. Vous choisissez entre acompte ou paiement total via Stripe. C\'est la meilleure arme contre les absences.' },
   { q: 'Combien de temps pour créer ma page ?', a: 'Moins de 5 minutes. Vous renseignez vos horaires, ajoutez vos services, et votre page est en ligne immédiatement. Aucune compétence technique requise.' },
@@ -358,7 +359,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
         <div class="text-center mb-10 sm:mb-14">
           <p class="text-brand-600 font-semibold text-sm mb-2">COMPARATIF</p>
           <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">BookEasy vs. Calendly, Planity & co</h2>
-          <p class="text-base sm:text-lg text-slate-500 max-w-xl mx-auto">Ils sont faits pour les grandes entreprises ou les gros salons. Nous sommes faits pour vous.</p>
+          <p class="text-base sm:text-lg text-slate-500 max-w-xl mx-auto">Tarifs opaques, outils complexes, appels commerciaux obligatoires. Nous, c'est simple : 0€ ou 12€/mois, en ligne en 5 minutes.</p>
         </div>
         <div class="card overflow-hidden">
           <table class="w-full text-left">
