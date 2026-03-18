@@ -49,7 +49,7 @@ function handleLogout() {
     <div v-if="sidebarOpen" class="fixed inset-0 z-30 bg-black/20 lg:hidden" @click="sidebarOpen = false" />
 
     <!-- Sidebar -->
-    <aside :class="['fixed top-0 left-0 z-40 h-full w-[250px] bg-white border-r border-slate-100 transition-transform duration-200 flex flex-col', sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0']">
+    <aside :class="['fixed top-0 left-0 z-40 h-full w-64 bg-white border-r border-slate-100 transition-transform duration-200 flex flex-col', sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0']">
       <!-- Logo -->
       <div class="flex items-center gap-2.5 px-5 h-14 border-b border-slate-100 shrink-0">
         <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center shrink-0">
@@ -108,7 +108,7 @@ function handleLogout() {
     </aside>
 
     <!-- Main -->
-    <main class="lg:ml-[250px] min-h-screen transition-all duration-200">
+    <main class="lg:ml-64 min-h-screen transition-all duration-200">
       <!-- Header -->
       <header class="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-slate-100 px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         <div class="flex items-center gap-3">
