@@ -23,7 +23,7 @@ async function save() { loading.value = true; saved.value = false; await $api('/
       <h3 class="text-heading-2 text-slate-900 mb-3">Abonnement</h3>
       <div class="flex items-center justify-between">
         <div><AppBadge :variant="authStore.isPremium ? 'brand' : 'neutral'">{{ authStore.isPremium ? 'Premium' : 'Gratuit' }}</AppBadge><p class="text-body-sm text-slate-500 mt-2">{{ authStore.isPremium ? 'Toutes les fonctionnalités débloquées.' : 'Passez Premium pour tout débloquer.' }}</p></div>
-        <NuxtLink v-if="!authStore.isPremium" to="/pricing" class="btn-primary btn-sm">Passer Premium</NuxtLink>
+        <NuxtLink v-if="!authStore.isPremium" to="/dashboard/upgrade" class="btn-primary btn-sm">Passer Premium</NuxtLink>
       </div>
     </div>
     <div class="card p-6">

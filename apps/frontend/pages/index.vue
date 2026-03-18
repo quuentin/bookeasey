@@ -1,6 +1,8 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'default' })
 const mobileMenu = ref(false)
+const authStore = useAuthStore()
+onMounted(() => { authStore.initFromStorage(); if (authStore.isAuthenticated) { authStore.fetchMe().catch(() => {}) } })
 
 // ── Hero questionnaire ──
 const quizStep = ref(0)
@@ -132,8 +134,13 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
         </NuxtLink>
         <div class="hidden sm:flex items-center gap-2">
           <NuxtLink to="/pricing" class="btn-ghost text-body-sm">Tarifs</NuxtLink>
-          <NuxtLink to="/login" class="btn-ghost text-body-sm">Connexion</NuxtLink>
-          <NuxtLink to="/register" class="btn-primary btn-sm">Essai gratuit</NuxtLink>
+          <template v-if="authStore.isAuthenticated">
+            <NuxtLink to="/dashboard" class="btn-primary btn-sm">Mon dashboard</NuxtLink>
+          </template>
+          <template v-else>
+            <NuxtLink to="/login" class="btn-ghost text-body-sm">Connexion</NuxtLink>
+            <NuxtLink to="/register" class="btn-primary btn-sm">Essai gratuit</NuxtLink>
+          </template>
         </div>
         <button class="sm:hidden p-2 text-slate-500" @click="mobileMenu = !mobileMenu">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" :d="mobileMenu ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'" /></svg>
@@ -141,8 +148,13 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
       </div>
       <div v-if="mobileMenu" class="sm:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-2">
         <NuxtLink to="/pricing" class="block py-2 text-slate-600">Tarifs</NuxtLink>
-        <NuxtLink to="/login" class="block py-2 text-slate-600">Connexion</NuxtLink>
-        <NuxtLink to="/register" class="btn-primary w-full text-center">Essai gratuit</NuxtLink>
+        <template v-if="authStore.isAuthenticated">
+          <NuxtLink to="/dashboard" class="btn-primary w-full text-center">Mon dashboard</NuxtLink>
+        </template>
+        <template v-else>
+          <NuxtLink to="/login" class="block py-2 text-slate-600">Connexion</NuxtLink>
+          <NuxtLink to="/register" class="btn-primary w-full text-center">Essai gratuit</NuxtLink>
+        </template>
       </div>
     </nav>
 
