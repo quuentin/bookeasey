@@ -38,6 +38,7 @@ export async function getPublicProfile(slug: string) {
       durationMinutes: s.durationMinutes,
       price: Number(s.price),
       color: s.color,
+      customFormId: s.customFormId,
     })),
     calendars: pro.calendars.map(c => ({
       id: c.id,

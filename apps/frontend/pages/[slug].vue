@@ -16,8 +16,20 @@ const loadingSlots = ref(false)
 const booking = ref(false)
 const bookingDone = ref(false)
 const clientForm = reactive({ name: '', email: '', phone: '', notes: '' })
+const customForm = ref<any>(null)
+const formResponses = ref<Record<string, string>>({})
 
-function selectService(s: any) { selectedService.value = s; step.value = 'slots'; selectedDate.value = nextDay() }
+function selectService(s: any) {
+  selectedService.value = s; step.value = 'slots'; selectedDate.value = nextDay()
+  // Load custom form if linked
+  customForm.value = null
+  formResponses.value = {}
+  if (s.customFormId) {
+    $fetch<any>(`${config.public.apiUrl}/booking/${slug}/form/${s.customFormId}`)
+      .then(f => { customForm.value = f })
+      .catch(() => {})
+  }
+}
 function nextDay() { const d = new Date(); d.setDate(d.getDate() + 1); return d.toISOString().split('T')[0] }
 
 watch(selectedDate, async (date) => {
@@ -33,7 +45,8 @@ function selectSlot(s: string) { selectedSlot.value = s; step.value = 'info' }
 async function submitBooking() {
   booking.value = true
   try {
-    await $fetch(`${config.public.apiUrl}/booking/${slug}/book`, { method: 'POST', body: { serviceId: selectedService.value.id, date: selectedDate.value, time: selectedSlot.value, clientName: clientForm.name, clientEmail: clientForm.email, clientPhone: clientForm.phone, clientNotes: clientForm.notes } })
+    const responses = customForm.value ? Object.entries(formResponses.value).map(([q, a]) => ({ question: q, answer: a })) : undefined
+    await $fetch(`${config.public.apiUrl}/booking/${slug}/book`, { method: 'POST', body: { serviceId: selectedService.value.id, date: selectedDate.value, time: selectedSlot.value, clientName: clientForm.name, clientEmail: clientForm.email, clientPhone: clientForm.phone, clientNotes: clientForm.notes, formResponses: responses } })
     bookingDone.value = true; step.value = 'confirm'
   } catch (e: any) { alert(e.data?.message || 'Erreur lors de la réservation') }
   finally { booking.value = false }
@@ -223,6 +236,50 @@ useHead({
                 <label class="block text-sm font-medium text-slate-700">Notes (optionnel)</label>
                 <textarea v-model="clientForm.notes" class="input-field" rows="2" placeholder="Des précisions pour votre rendez-vous..." />
               </div>
+
+              <!-- Custom form fields -->
+              <div v-if="customForm?.fields?.length" class="pt-3 border-t border-slate-100 space-y-4">
+                <div class="flex items-center gap-2 mb-1">
+                  <svg class="w-4 h-4 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                  <p class="text-sm font-medium text-slate-900">{{ customForm.name }}</p>
+                </div>
+                <div v-for="(field, fi) in customForm.fields" :key="fi" class="space-y-1.5">
+                  <label class="block text-sm font-medium text-slate-700">
+                    {{ field.label }}
+                    <span v-if="field.required" class="text-brand-500 ml-0.5">*</span>
+                  </label>
+                  <input
+                    v-if="field.type === 'text'"
+                    v-model="formResponses[field.label]"
+                    type="text"
+                    class="input-field"
+                    :required="field.required"
+                    :placeholder="field.label"
+                  />
+                  <textarea
+                    v-else-if="field.type === 'textarea'"
+                    v-model="formResponses[field.label]"
+                    class="input-field"
+                    rows="3"
+                    :required="field.required"
+                    :placeholder="field.label"
+                  />
+                  <select
+                    v-else-if="field.type === 'select'"
+                    v-model="formResponses[field.label]"
+                    class="input-field"
+                    :required="field.required"
+                  >
+                    <option value="" disabled>Choisir...</option>
+                    <option v-for="opt in field.options" :key="opt" :value="opt">{{ opt }}</option>
+                  </select>
+                  <label v-else-if="field.type === 'checkbox'" class="flex items-center gap-2 cursor-pointer">
+                    <input v-model="formResponses[field.label]" type="checkbox" class="w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
+                    <span class="text-sm text-slate-700">{{ field.label }}</span>
+                  </label>
+                </div>
+              </div>
+
               <AppButton type="submit" :loading="booking" class="w-full">
                 Confirmer la réservation
               </AppButton>
