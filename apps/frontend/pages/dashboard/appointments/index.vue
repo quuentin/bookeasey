@@ -14,6 +14,8 @@ function fmtTime(d: string) { return new Date(d).toLocaleTimeString('fr-FR', { h
 const sLabels: Record<string, string> = { CONFIRMED: 'Confirmé', CANCELLED: 'Annulé', COMPLETED: 'Terminé', NO_SHOW: 'Absent' }
 const sVariants: Record<string, string> = { CONFIRMED: 'success', CANCELLED: 'danger', COMPLETED: 'neutral', NO_SHOW: 'warning' }
 async function updateStatus(id: string, status: string) { await $api(`/appointments/${id}/status`, { method: 'PUT', body: { status } }); refresh() }
+const showCreateModal = ref(false)
+function onCreated() { refresh() }
 </script>
 
 <template>
@@ -22,6 +24,12 @@ async function updateStatus(id: string, status: string) { await $api(`/appointme
       <div>
         <h2 class="text-lg sm:text-xl font-bold text-slate-900">Rendez-vous</h2>
         <p class="text-sm text-slate-500 mt-0.5">{{ appointments?.total ?? 0 }} rendez-vous au total</p>
+      </div>
+      <div class="flex items-center gap-3 self-start">
+        <button class="btn-primary btn-sm flex items-center gap-1.5" @click="showCreateModal = true">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          Nouveau RDV
+        </button>
       </div>
       <div class="flex gap-1 p-1 bg-slate-100 rounded-xl self-start">
         <button v-for="f in ['all', 'CONFIRMED', 'COMPLETED', 'CANCELLED']" :key="f"
@@ -35,7 +43,7 @@ async function updateStatus(id: string, status: string) { await $api(`/appointme
 
     <div class="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden">
       <div v-if="appointments?.data?.length" class="divide-y divide-slate-50">
-        <div v-for="apt in appointments.data" :key="apt.id" class="flex items-center justify-between px-4 sm:px-6 py-3.5 hover:bg-slate-50/50 transition-colors">
+        <NuxtLink v-for="apt in appointments.data" :key="apt.id" :to="`/dashboard/appointments/${apt.id}`" class="flex items-center justify-between px-4 sm:px-6 py-3.5 hover:bg-slate-50/50 transition-colors block">
           <div class="flex items-center gap-3 sm:gap-4 min-w-0">
             <div class="w-12 h-12 rounded-xl bg-slate-50 flex flex-col items-center justify-center shrink-0 border border-slate-100">
               <p class="text-[10px] text-slate-400 leading-none">{{ fmtDate(apt.startTime).split(' ')[0] }}</p>
@@ -56,15 +64,15 @@ async function updateStatus(id: string, status: string) { await $api(`/appointme
           <div class="flex items-center gap-2 sm:gap-3 shrink-0 ml-2">
             <AppBadge :variant="(sVariants[apt.status] as any)" size="sm">{{ sLabels[apt.status] }}</AppBadge>
             <div v-if="apt.status === 'CONFIRMED'" class="hidden sm:flex gap-1">
-              <button class="p-1.5 rounded-lg hover:bg-emerald-50 text-slate-400 hover:text-emerald-600 transition-colors" title="Terminer" @click="updateStatus(apt.id, 'COMPLETED')">
+              <button class="p-1.5 rounded-lg hover:bg-emerald-50 text-slate-400 hover:text-emerald-600 transition-colors" title="Terminer" @click.prevent.stop="updateStatus(apt.id, 'COMPLETED')">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
               </button>
-              <button class="p-1.5 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors" title="Annuler" @click="updateStatus(apt.id, 'CANCELLED')">
+              <button class="p-1.5 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors" title="Annuler" @click.prevent.stop="updateStatus(apt.id, 'CANCELLED')">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
           </div>
-        </div>
+        </NuxtLink>
       </div>
 
       <div v-else class="px-6 py-14 text-center">
@@ -75,5 +83,7 @@ async function updateStatus(id: string, status: string) { await $api(`/appointme
         <p class="text-xs text-slate-400">Les réservations de vos clients apparaîtront ici</p>
       </div>
     </div>
+
+    <CreateAppointmentModal v-model="showCreateModal" @created="onCreated" />
   </div>
 </template>

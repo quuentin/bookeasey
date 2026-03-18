@@ -25,6 +25,16 @@ router.get('/upcoming', authenticate, async (req: Request, res: Response) => {
   res.json(appointments)
 })
 
+router.get('/:id', authenticate, async (req: Request, res: Response) => {
+  const appointment = await appointmentService.getById(req.user!.professionalId, req.params.id)
+  res.json(appointment)
+})
+
+router.post('/', authenticate, async (req: Request, res: Response) => {
+  const appointment = await appointmentService.createManual(req.user!.professionalId, req.body)
+  res.status(201).json(appointment)
+})
+
 router.put('/:id/status', authenticate, async (req: Request, res: Response) => {
   const appointment = await appointmentService.updateStatus(
     req.user!.professionalId,

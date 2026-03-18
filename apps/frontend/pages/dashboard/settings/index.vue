@@ -30,5 +30,13 @@ async function save() { loading.value = true; saved.value = false; await $api('/
       <h3 class="text-heading-2 text-slate-900 mb-3">Lien de réservation</h3>
       <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl"><code class="text-body text-brand-600 flex-1">bookeasey.fr/{{ authStore.professional?.slug }}</code><button class="btn-secondary btn-sm" @click="navigator.clipboard.writeText(`${$config.public.appUrl}/${authStore.professional?.slug}`)">Copier</button></div>
     </div>
+    <div class="card p-6">
+      <h3 class="text-heading-2 text-slate-900 mb-3">Intégrations</h3>
+      <p class="text-body-sm text-slate-500 mb-4">Connectez Google Calendar et d'autres outils.</p>
+      <NuxtLink to="/dashboard/settings/integrations" class="btn-secondary btn-sm inline-flex items-center gap-1.5">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+        Gérer les intégrations
+      </NuxtLink>
+    </div>
   </div>
 </template>

@@ -93,12 +93,21 @@ function handleLogout() {
         </NuxtLink>
         <NuxtLink to="/dashboard/settings"
           :class="['flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-            route.path.startsWith('/dashboard/settings') ? 'bg-brand-50 text-brand-700' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50']"
+            route.path === '/dashboard/settings' ? 'bg-brand-50 text-brand-700' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50']"
         >
           <svg class="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7">
             <path stroke-linecap="round" stroke-linejoin="round" :d="iconPaths.settings" />
           </svg>
           <span>Paramètres</span>
+        </NuxtLink>
+        <NuxtLink to="/dashboard/settings/integrations"
+          :class="['flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+            route.path === '/dashboard/settings/integrations' ? 'bg-brand-50 text-brand-700' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50']"
+        >
+          <svg class="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+          </svg>
+          <span>Intégrations</span>
         </NuxtLink>
       </div>
     </aside>
