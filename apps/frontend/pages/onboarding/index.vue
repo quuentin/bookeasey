@@ -10,7 +10,43 @@ function addService() { services.value.push({ name: '', durationMinutes: 30, pri
 function removeService(i: number) { if (services.value.length > 1) services.value.splice(i, 1) }
 function next() { if (currentStep.value < totalSteps) currentStep.value++ }
 function prev() { if (currentStep.value > 1) currentStep.value-- }
-async function submit() { loading.value = true; try { await $api('/professional/onboarding', { method: 'PUT', body: { weeklySchedule: Object.entries(workDays).map(([d,a]) => ({ dayOfWeek: Number(d), startTime: schedule.startTime, endTime: schedule.endTime, isActive: a })), bufferMinutes: schedule.bufferMinutes, services: services.value.filter(s => s.name.trim()) } }); await authStore.fetchMe(); navigateTo('/dashboard') } catch (e) { console.error(e) } finally { loading.value = false } }
+const error = ref('')
+async function submit() {
+  loading.value = true
+  error.value = ''
+  try {
+    const validServices = services.value.filter(s => s.name.trim())
+    if (!validServices.length) {
+      error.value = 'Ajoutez au moins un service.'
+      loading.value = false
+      return
+    }
+    await $api('/professional/onboarding', {
+      method: 'PUT',
+      body: {
+        weeklySchedule: Object.entries(workDays).map(([d, a]) => ({
+          dayOfWeek: Number(d),
+          startTime: schedule.startTime,
+          endTime: schedule.endTime,
+          isActive: a,
+        })),
+        bufferMinutes: Number(schedule.bufferMinutes),
+        services: validServices.map(s => ({
+          name: s.name,
+          durationMinutes: Number(s.durationMinutes),
+          price: Number(s.price),
+        })),
+      },
+    })
+    await authStore.fetchMe()
+    navigateTo('/dashboard')
+  } catch (e: any) {
+    console.error('Onboarding error:', e)
+    error.value = e?.data?.message || e?.message || 'Une erreur est survenue. Réessayez.'
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <template>
@@ -45,7 +81,8 @@ async function submit() { loading.value = true; try { await $api('/professional/
           <h2 class="text-heading-1 text-slate-900 mb-1">Votre page est prête !</h2><p class="text-body text-slate-500 mb-6">Accessible à <span class="font-semibold text-brand-600">bookeasey.fr/{{ authStore.professional?.slug }}</span></p>
           <div class="p-5 bg-slate-50 rounded-xl space-y-3"><h3 class="text-heading-2 text-slate-900">{{ authStore.professional?.businessName }}</h3><p class="text-body-sm text-slate-500">{{ authStore.professional?.sector }}</p><div class="border-t border-slate-200 pt-3 space-y-2"><div v-for="(svc,i) in services.filter(s=>s.name.trim())" :key="i" class="flex items-center justify-between p-3 bg-white rounded-lg border border-slate-100"><div><p class="font-medium text-slate-800">{{ svc.name }}</p><p class="text-body-sm text-slate-400">{{ svc.durationMinutes }} min</p></div><span class="font-semibold text-brand-600">{{ svc.price }}€</span></div></div></div>
         </div>
-        <div class="flex items-center justify-between mt-8 pt-5 border-t border-slate-100">
+        <div v-if="error" class="mt-6 p-3 rounded-lg bg-red-50 border border-red-100 text-sm text-red-600">{{ error }}</div>
+        <div class="flex items-center justify-between mt-6 pt-5 border-t border-slate-100">
           <AppButton v-if="currentStep>1" variant="ghost" @click="prev">Retour</AppButton><div v-else />
           <AppButton v-if="currentStep<totalSteps" @click="next">Suivant</AppButton><AppButton v-else :loading="loading" @click="submit">Lancer ma page</AppButton>
         </div>
