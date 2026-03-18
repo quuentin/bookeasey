@@ -10,7 +10,7 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <div class="max-w-xl">
+  <div class="max-w-2xl">
     <h2 class="text-heading-1 text-slate-900 mb-6">Nouveau service</h2>
     <div class="card p-6">
       <form class="space-y-4" @submit.prevent="handleSubmit">

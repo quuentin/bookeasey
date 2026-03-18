@@ -7,7 +7,7 @@ async function save() { loading.value = true; saved.value = false; await $api('/
 </script>
 
 <template>
-  <div class="max-w-2xl space-y-6">
+  <div class="space-y-6">
     <h2 class="text-heading-1 text-slate-900">Paramètres</h2>
     <div class="card p-6">
       <h3 class="text-heading-2 text-slate-900 mb-5">Profil de l'activité</h3>

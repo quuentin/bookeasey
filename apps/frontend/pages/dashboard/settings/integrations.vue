@@ -74,7 +74,7 @@ function fmtDate(d: string) {
 </script>
 
 <template>
-  <div class="max-w-2xl space-y-6">
+  <div class="space-y-6">
     <div>
       <h2 class="text-heading-1 text-slate-900">Intégrations</h2>
       <p class="text-sm text-slate-500 mt-1">Connectez vos outils externes</p>

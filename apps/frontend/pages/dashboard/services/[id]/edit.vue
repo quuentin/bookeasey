@@ -55,7 +55,7 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <div class="max-w-xl">
+  <div class="max-w-2xl">
     <h2 class="text-heading-1 text-slate-900 mb-6">Modifier le service</h2>
 
     <div v-if="fetching" class="card p-6 flex items-center justify-center py-12">

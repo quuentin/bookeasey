@@ -12,7 +12,7 @@ async function removeOverride(id: string) { if (!calendars.value?.length) return
 </script>
 
 <template>
-  <div class="space-y-6 max-w-3xl">
+  <div class="space-y-6">
     <h2 class="text-heading-1 text-slate-900">Disponibilités</h2>
     <div class="card p-6">
       <h3 class="text-heading-2 text-slate-900 mb-5">Horaires hebdomadaires</h3>

@@ -88,7 +88,7 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <div class="max-w-2xl">
+  <div class="max-w-3xl">
     <h2 class="text-heading-1 text-slate-900 mb-6">Nouveau formulaire</h2>
 
     <form class="space-y-6" @submit.prevent="handleSubmit">
