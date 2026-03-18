@@ -20,16 +20,21 @@ router.get('/:id/schedule', authenticate, async (req: Request, res: Response) =>
 })
 
 router.put('/:id/schedule', authenticate, async (req: Request, res: Response) => {
-  const body = {
-    schedule: req.body.schedule?.map((d: any) => ({
-      dayOfWeek: parseInt(d.dayOfWeek, 10),
-      startTime: String(d.startTime),
-      endTime: String(d.endTime),
-      isActive: Boolean(d.isActive),
-    })),
-    bufferMinutes: req.body.bufferMinutes !== undefined ? parseInt(String(req.body.bufferMinutes), 10) || 0 : undefined,
+  // Parse all values to correct types to avoid Prisma type errors
+  const schedule = Array.isArray(req.body.schedule) ? req.body.schedule.map((d: any) => ({
+    dayOfWeek: Number(d.dayOfWeek),
+    startTime: String(d.startTime),
+    endTime: String(d.endTime),
+    isActive: d.isActive === true || d.isActive === 'true',
+  })) : []
+
+  let bufferMinutes: number | undefined = undefined
+  if (req.body.bufferMinutes !== undefined && req.body.bufferMinutes !== null && req.body.bufferMinutes !== '') {
+    bufferMinutes = Number(req.body.bufferMinutes)
+    if (isNaN(bufferMinutes)) bufferMinutes = 0
   }
-  await calendarService.updateSchedule(req.user!.professionalId, req.params.id, body)
+
+  await calendarService.updateSchedule(req.user!.professionalId, req.params.id, { schedule, bufferMinutes })
   res.json({ message: 'Horaires mis à jour' })
 })
 
