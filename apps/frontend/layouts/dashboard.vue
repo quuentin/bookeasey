@@ -108,17 +108,20 @@ function handleLogout() {
     </aside>
 
     <!-- Main -->
-    <main class="lg:ml-[250px] transition-all duration-200">
+    <main class="lg:ml-[250px] min-h-screen transition-all duration-200">
       <!-- Header -->
       <header class="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-slate-100 px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <button class="p-1.5 rounded-lg hover:bg-slate-50 text-slate-400 transition-colors lg:hidden" @click="sidebarOpen = true">
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
           </button>
+          <h1 class="text-sm sm:text-base font-semibold text-slate-900">
+            {{ [...mainNav, ...premiumNav].find(i => isActive(i.to))?.label || 'Dashboard' }}
+          </h1>
         </div>
 
         <!-- Right side -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 shrink-0">
           <!-- Plan badge -->
           <span v-if="authStore.isPremium" class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold bg-brand-50 text-brand-600 border border-brand-100">
             <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
@@ -175,7 +178,7 @@ function handleLogout() {
       </header>
 
       <!-- Content -->
-      <div class="p-4 sm:p-6 lg:p-8">
+      <div class="p-4 sm:p-6 lg:p-8 w-full min-w-0">
         <slot />
       </div>
     </main>
