@@ -9,8 +9,8 @@ RUN npm install
 
 RUN npx prisma generate
 
-COPY src ./src
-COPY nixpacks.toml ./
+# v3 - force cache bust
+COPY . .
 
 EXPOSE 4000
 
