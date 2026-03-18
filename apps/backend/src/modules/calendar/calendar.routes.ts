@@ -20,7 +20,16 @@ router.get('/:id/schedule', authenticate, async (req: Request, res: Response) =>
 })
 
 router.put('/:id/schedule', authenticate, async (req: Request, res: Response) => {
-  await calendarService.updateSchedule(req.user!.professionalId, req.params.id, req.body)
+  const body = {
+    schedule: req.body.schedule?.map((d: any) => ({
+      dayOfWeek: parseInt(d.dayOfWeek, 10),
+      startTime: String(d.startTime),
+      endTime: String(d.endTime),
+      isActive: Boolean(d.isActive),
+    })),
+    bufferMinutes: req.body.bufferMinutes !== undefined ? parseInt(String(req.body.bufferMinutes), 10) || 0 : undefined,
+  }
+  await calendarService.updateSchedule(req.user!.professionalId, req.params.id, body)
   res.json({ message: 'Horaires mis à jour' })
 })
 

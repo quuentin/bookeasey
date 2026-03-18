@@ -69,9 +69,10 @@ export async function updateSchedule(professionalId: string, calendarId: string,
     }
 
     if (data.bufferMinutes !== undefined) {
+      const parsedBuffer = parseInt(String(data.bufferMinutes), 10) || 0
       await tx.professional.update({
         where: { id: professionalId },
-        data: { bufferMinutes: Number(data.bufferMinutes) },
+        data: { bufferMinutes: parsedBuffer },
       })
     }
   })
