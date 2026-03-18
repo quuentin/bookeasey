@@ -3,6 +3,9 @@ const route = useRoute()
 const authStore = useAuthStore()
 const sidebarOpen = ref(false)
 const userMenuOpen = ref(false)
+const { isDark, init: initDark, toggle: toggleDark } = useDarkMode()
+
+onMounted(() => { initDark() })
 
 const mainNav = [
   { label: 'Tableau de bord', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6', to: '/dashboard' },
@@ -26,7 +29,6 @@ function isActive(to: string) {
   return route.path.startsWith(to)
 }
 
-// Close menus on route change
 watch(() => route.path, () => { sidebarOpen.value = false; userMenuOpen.value = false })
 
 if (import.meta.client) {
@@ -44,28 +46,30 @@ function handleLogout() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-slate-50">
+  <div class="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
     <!-- Mobile overlay -->
-    <div v-if="sidebarOpen" class="fixed inset-0 z-30 bg-black/20 lg:hidden" @click="sidebarOpen = false" />
+    <div v-if="sidebarOpen" class="fixed inset-0 z-30 bg-black/20 dark:bg-black/50 lg:hidden" @click="sidebarOpen = false" />
 
     <!-- Sidebar -->
-    <aside :class="['fixed top-0 left-0 z-40 h-full w-64 bg-white border-r border-slate-100 transition-transform duration-200 flex flex-col', sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0']">
+    <aside :class="['fixed top-0 left-0 z-40 h-full w-64 bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800 transition-all duration-200 flex flex-col', sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0']">
       <!-- Logo -->
-      <div class="flex items-center gap-2.5 px-5 h-14 border-b border-slate-100 shrink-0">
+      <div class="flex items-center gap-2.5 px-5 h-14 border-b border-slate-100 dark:border-slate-800 shrink-0">
         <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center shrink-0">
           <span class="text-white font-bold text-sm">B</span>
         </div>
-        <span class="font-bold text-slate-900">BookEasy</span>
+        <span class="font-bold text-slate-900 dark:text-white">BookEasy</span>
         <AppBadge v-if="authStore.isPremium" variant="brand" size="sm" class="ml-auto">PRO</AppBadge>
       </div>
 
       <!-- Main nav -->
       <nav class="flex-1 overflow-y-auto py-3 px-3">
-        <p class="px-3 mb-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Principal</p>
+        <p class="px-3 mb-1.5 text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Principal</p>
         <div class="space-y-0.5">
           <NuxtLink v-for="item in mainNav" :key="item.to" :to="item.to"
             :class="['flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all',
-              isActive(item.to) ? 'bg-brand-50 text-brand-700 shadow-xs shadow-brand-100' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50']">
+              isActive(item.to)
+                ? 'bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-400 shadow-xs shadow-brand-100 dark:shadow-none'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800']">
             <svg class="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" :d="item.icon" /></svg>
             <span>{{ item.label }}</span>
           </NuxtLink>
@@ -73,11 +77,13 @@ function handleLogout() {
 
         <!-- Premium features -->
         <div class="mt-5">
-          <p class="px-3 mb-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Premium</p>
+          <p class="px-3 mb-1.5 text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Premium</p>
           <div class="space-y-0.5">
             <NuxtLink v-for="item in premiumNav" :key="item.to" :to="item.to"
               :class="['flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all',
-                isActive(item.to) ? 'bg-brand-50 text-brand-700 shadow-xs shadow-brand-100' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50']">
+                isActive(item.to)
+                  ? 'bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-400'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800']">
               <svg class="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" :d="item.icon" /></svg>
               <span>{{ item.label }}</span>
               <span v-if="!authStore.isPremium" class="ml-auto">
@@ -89,7 +95,7 @@ function handleLogout() {
       </nav>
 
       <!-- Bottom -->
-      <div class="shrink-0 p-3 border-t border-slate-100 space-y-1">
+      <div class="shrink-0 p-3 border-t border-slate-100 dark:border-slate-800 space-y-1">
         <!-- Upgrade CTA -->
         <NuxtLink v-if="!authStore.isPremium" to="/dashboard/upgrade"
           class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[13px] font-semibold text-white mb-2 transition-all hover:opacity-90"
@@ -98,9 +104,21 @@ function handleLogout() {
           Passer Premium
         </NuxtLink>
 
+        <!-- Dark mode toggle -->
+        <button
+          class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors w-full"
+          @click="toggleDark"
+        >
+          <svg v-if="isDark" class="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+          <svg v-else class="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
+          {{ isDark ? 'Mode clair' : 'Mode sombre' }}
+        </button>
+
         <NuxtLink to="/dashboard/settings"
           :class="['flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-colors',
-            isActive('/dashboard/settings') ? 'bg-brand-50 text-brand-700' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50']">
+            isActive('/dashboard/settings')
+              ? 'bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-400'
+              : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800']">
           <svg class="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" :d="settingsIcon" /></svg>
           Paramètres
         </NuxtLink>
@@ -110,63 +128,68 @@ function handleLogout() {
     <!-- Main -->
     <main class="lg:ml-64 min-h-screen transition-all duration-200">
       <!-- Header -->
-      <header class="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-slate-100 px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+      <header class="sticky top-0 z-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <button class="p-1.5 rounded-lg hover:bg-slate-50 text-slate-400 transition-colors lg:hidden" @click="sidebarOpen = true">
+          <button class="p-1.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-400 transition-colors lg:hidden" @click="sidebarOpen = true">
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
           </button>
-          <h1 class="text-sm sm:text-base font-semibold text-slate-900">
+          <h1 class="text-sm sm:text-base font-semibold text-slate-900 dark:text-white">
             {{ [...mainNav, ...premiumNav].find(i => isActive(i.to))?.label || 'Dashboard' }}
           </h1>
         </div>
 
         <!-- Right side -->
         <div class="flex items-center gap-2 shrink-0">
+          <!-- Dark mode toggle (header) -->
+          <button class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 dark:text-slate-500 transition-colors hidden sm:block" @click="toggleDark">
+            <svg v-if="isDark" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+            <svg v-else class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
+          </button>
+
           <!-- Plan badge -->
-          <span v-if="authStore.isPremium" class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold bg-brand-50 text-brand-600 border border-brand-100">
+          <span v-if="authStore.isPremium" class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold bg-brand-50 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-500/20">
             <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
             Premium
           </span>
 
           <!-- User menu -->
           <div class="relative user-menu-container">
-            <button class="flex items-center gap-2 py-1 pl-1 pr-2 rounded-lg hover:bg-slate-50 transition-colors" @click="userMenuOpen = !userMenuOpen">
+            <button class="flex items-center gap-2 py-1 pl-1 pr-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" @click="userMenuOpen = !userMenuOpen">
               <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center">
                 <span class="text-white font-semibold text-xs">{{ authStore.user?.email?.charAt(0).toUpperCase() || 'U' }}</span>
               </div>
               <div class="hidden sm:block text-left">
-                <p class="text-xs font-medium text-slate-900 leading-none">{{ authStore.professional?.businessName }}</p>
-                <p class="text-[10px] text-slate-400 leading-none mt-0.5">{{ authStore.user?.email }}</p>
+                <p class="text-xs font-medium text-slate-900 dark:text-white leading-none">{{ authStore.professional?.businessName }}</p>
+                <p class="text-[10px] text-slate-400 dark:text-slate-500 leading-none mt-0.5">{{ authStore.user?.email }}</p>
               </div>
-              <svg class="w-3.5 h-3.5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              <svg class="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
             </button>
 
-            <!-- Dropdown -->
             <Transition name="dropdown">
-              <div v-if="userMenuOpen" class="absolute right-0 mt-1.5 w-60 bg-white rounded-xl border border-slate-100 shadow-elevated py-1 z-50">
-                <div class="px-3 py-2.5 border-b border-slate-100">
-                  <p class="text-sm font-semibold text-slate-900 truncate">{{ authStore.professional?.businessName }}</p>
-                  <p class="text-xs text-slate-400 truncate mt-0.5">{{ authStore.user?.email }}</p>
+              <div v-if="userMenuOpen" class="absolute right-0 mt-1.5 w-60 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-elevated py-1 z-50">
+                <div class="px-3 py-2.5 border-b border-slate-100 dark:border-slate-700">
+                  <p class="text-sm font-semibold text-slate-900 dark:text-white truncate">{{ authStore.professional?.businessName }}</p>
+                  <p class="text-xs text-slate-400 dark:text-slate-500 truncate mt-0.5">{{ authStore.user?.email }}</p>
                   <div class="mt-2">
                     <AppBadge :variant="authStore.isPremium ? 'brand' : 'neutral'" size="sm">{{ authStore.isPremium ? 'Premium' : 'Gratuit' }}</AppBadge>
                   </div>
                 </div>
                 <div class="py-1">
-                  <NuxtLink to="/dashboard/settings" class="flex items-center gap-2.5 px-3 py-2 text-[13px] text-slate-600 hover:bg-slate-50 transition-colors" @click="userMenuOpen = false">
+                  <NuxtLink to="/dashboard/settings" class="flex items-center gap-2.5 px-3 py-2 text-[13px] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" @click="userMenuOpen = false">
                     <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" :d="settingsIcon" /></svg>
                     Paramètres
                   </NuxtLink>
-                  <NuxtLink to="/dashboard/settings/integrations" class="flex items-center gap-2.5 px-3 py-2 text-[13px] text-slate-600 hover:bg-slate-50 transition-colors" @click="userMenuOpen = false">
+                  <NuxtLink to="/dashboard/settings/integrations" class="flex items-center gap-2.5 px-3 py-2 text-[13px] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" @click="userMenuOpen = false">
                     <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
                     Intégrations
                   </NuxtLink>
-                  <NuxtLink v-if="!authStore.isPremium" to="/dashboard/upgrade" class="flex items-center gap-2.5 px-3 py-2 text-[13px] text-brand-600 hover:bg-brand-50 transition-colors" @click="userMenuOpen = false">
+                  <NuxtLink v-if="!authStore.isPremium" to="/dashboard/upgrade" class="flex items-center gap-2.5 px-3 py-2 text-[13px] text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-500/10 transition-colors" @click="userMenuOpen = false">
                     <svg class="w-4 h-4 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
                     Passer Premium
                   </NuxtLink>
                 </div>
-                <div class="border-t border-slate-100 py-1">
-                  <button class="flex items-center gap-2.5 px-3 py-2 text-[13px] text-red-600 hover:bg-red-50 transition-colors w-full text-left" @click="handleLogout">
+                <div class="border-t border-slate-100 dark:border-slate-700 py-1">
+                  <button class="flex items-center gap-2.5 px-3 py-2 text-[13px] text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors w-full text-left" @click="handleLogout">
                     <svg class="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
                     Se déconnecter
                   </button>

@@ -3,6 +3,7 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 import plugin from 'tailwindcss/plugin'
 
 export default {
+  darkMode: 'class',
   content: [
     './components/**/*.{vue,ts}',
     './layouts/**/*.vue',

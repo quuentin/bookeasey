@@ -32,15 +32,15 @@ async function handleUpgrade() {
   <div class="max-w-3xl mx-auto">
     <!-- Header -->
     <div class="text-center mb-8 sm:mb-10">
-      <div class="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center mx-auto mb-4">
+      <div class="w-14 h-14 rounded-2xl bg-brand-50 dark:bg-brand-500/10 flex items-center justify-center mx-auto mb-4">
         <svg class="w-7 h-7 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" /></svg>
       </div>
-      <h1 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2">Passez à Premium</h1>
-      <p class="text-sm sm:text-base text-slate-500">Débloquez tout le potentiel de BookEasy pour développer votre activité.</p>
+      <h1 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2">Passez à Premium</h1>
+      <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400">Débloquez tout le potentiel de BookEasy pour développer votre activité.</p>
     </div>
 
     <!-- Price card -->
-    <div class="bg-white rounded-2xl border border-slate-100 shadow-card overflow-hidden mb-8">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-card overflow-hidden mb-8">
       <div class="p-6 sm:p-8 text-center" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)">
         <p class="text-white/70 text-sm font-medium mb-2">Premium</p>
         <div class="flex items-baseline justify-center gap-1 mb-2">
@@ -53,12 +53,12 @@ async function handleUpgrade() {
       <div class="p-6 sm:p-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
           <div v-for="(f, i) in premiumFeatures" :key="i" class="flex gap-3">
-            <div class="w-9 h-9 rounded-lg bg-brand-50 flex items-center justify-center shrink-0">
+            <div class="w-9 h-9 rounded-lg bg-brand-50 dark:bg-brand-500/10 flex items-center justify-center shrink-0">
               <svg class="w-4.5 h-4.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" :d="f.icon" /></svg>
             </div>
             <div>
-              <p class="text-sm font-semibold text-slate-900">{{ f.title }}</p>
-              <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">{{ f.desc }}</p>
+              <p class="text-sm font-semibold text-slate-900 dark:text-white">{{ f.title }}</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">{{ f.desc }}</p>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ async function handleUpgrade() {
           {{ loading ? 'Redirection...' : 'Souscrire à Premium' }}
         </button>
 
-        <div class="flex flex-wrap items-center justify-center gap-4 mt-4 text-xs text-slate-400">
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-4 text-xs text-slate-400 dark:text-slate-500">
           <span class="flex items-center gap-1">
             <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
             Sans engagement
@@ -99,7 +99,7 @@ async function handleUpgrade() {
     </div>
 
     <!-- Already premium -->
-    <div v-if="authStore.isPremium" class="text-center p-6 bg-emerald-50 rounded-2xl border border-emerald-100">
+    <div v-if="authStore.isPremium" class="text-center p-6 bg-emerald-50 dark:bg-emerald-500/10 rounded-2xl border border-emerald-100 dark:border-emerald-500/20">
       <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-3">
         <svg class="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
       </div>

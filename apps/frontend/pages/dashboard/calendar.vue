@@ -44,8 +44,8 @@ const selectedDayApts = computed(() => aptsFor(selectedDay.value))
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
       <div>
-        <h2 class="text-lg font-bold text-slate-900">Calendrier</h2>
-        <p class="text-sm text-slate-500 mt-0.5">{{ weekStart.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }) }}</p>
+        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Calendrier</h2>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">{{ weekStart.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }) }}</p>
       </div>
       <div class="flex items-center gap-2">
         <button class="btn-primary btn-sm flex items-center gap-1.5" @click="showCreateModal = true">
@@ -53,12 +53,12 @@ const selectedDayApts = computed(() => aptsFor(selectedDay.value))
           <span class="hidden sm:inline">Nouveau RDV</span>
           <span class="sm:hidden">Nouveau</span>
         </button>
-        <div class="flex items-center gap-0.5 bg-slate-100 rounded-lg p-0.5">
-          <button class="p-1.5 rounded-md hover:bg-white hover:shadow-xs text-slate-500 transition-all" @click="prev">
+        <div class="flex items-center gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-0.5">
+          <button class="p-1.5 rounded-md hover:bg-white dark:hover:bg-slate-700 hover:shadow-xs text-slate-500 dark:text-slate-400 transition-all" @click="prev">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
           </button>
-          <button class="px-2.5 py-1 rounded-md text-xs font-medium text-slate-700 hover:bg-white hover:shadow-xs transition-all" @click="goToday">Aujourd'hui</button>
-          <button class="p-1.5 rounded-md hover:bg-white hover:shadow-xs text-slate-500 transition-all" @click="next">
+          <button class="px-2.5 py-1 rounded-md text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-700 hover:shadow-xs transition-all" @click="goToday">Aujourd'hui</button>
+          <button class="p-1.5 rounded-md hover:bg-white dark:hover:bg-slate-700 hover:shadow-xs text-slate-500 dark:text-slate-400 transition-all" @click="next">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
           </button>
         </div>
@@ -72,54 +72,54 @@ const selectedDayApts = computed(() => aptsFor(selectedDay.value))
         <button v-for="d in weekDays" :key="d.toISOString()"
           :class="['flex flex-col items-center min-w-[52px] py-2 px-2.5 rounded-xl text-xs font-medium transition-all shrink-0',
             isSelected(d) ? 'bg-brand-600 text-white shadow-glow' :
-            isToday(d) ? 'bg-brand-50 text-brand-700 border border-brand-200' :
-            'bg-white text-slate-600 border border-slate-100']"
+            isToday(d) ? 'bg-brand-50 dark:bg-brand-500/10 text-brand-700 border border-brand-200 dark:border-brand-500/30' :
+            'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700']"
           @click="selectedDay = d"
         >
-          <span class="text-[10px] uppercase" :class="isSelected(d) ? 'text-white/70' : 'text-slate-400'">{{ d.toLocaleDateString('fr-FR', { weekday: 'short' }).slice(0, 3) }}</span>
+          <span class="text-[10px] uppercase" :class="isSelected(d) ? 'text-white/70' : 'text-slate-400 dark:text-slate-500'">{{ d.toLocaleDateString('fr-FR', { weekday: 'short' }).slice(0, 3) }}</span>
           <span class="text-base font-bold mt-0.5">{{ d.getDate() }}</span>
           <span v-if="aptsFor(d).length" class="w-1.5 h-1.5 rounded-full mt-1" :class="isSelected(d) ? 'bg-white/70' : 'bg-brand-400'" />
         </button>
       </div>
 
       <!-- Selected day appointments -->
-      <div class="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden">
-        <div class="px-4 py-3 border-b border-slate-100">
-          <p class="text-sm font-semibold text-slate-900 capitalize">{{ fmtDayLong(selectedDay) }}</p>
-          <p class="text-xs text-slate-400">{{ selectedDayApts.length }} rendez-vous</p>
+      <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-xs overflow-hidden">
+        <div class="px-4 py-3 border-b border-slate-100 dark:border-slate-700">
+          <p class="text-sm font-semibold text-slate-900 dark:text-white capitalize">{{ fmtDayLong(selectedDay) }}</p>
+          <p class="text-xs text-slate-400 dark:text-slate-500">{{ selectedDayApts.length }} rendez-vous</p>
         </div>
-        <div v-if="selectedDayApts.length" class="divide-y divide-slate-50">
+        <div v-if="selectedDayApts.length" class="divide-y divide-slate-50 dark:divide-slate-700">
           <NuxtLink v-for="a in selectedDayApts" :key="a.id" :to="`/dashboard/appointments/${a.id}`"
-            class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 transition-colors">
-            <div class="w-10 h-10 rounded-lg bg-brand-50 flex flex-col items-center justify-center shrink-0">
+            class="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+            <div class="w-10 h-10 rounded-lg bg-brand-50 dark:bg-brand-500/10 flex flex-col items-center justify-center shrink-0">
               <p class="text-[11px] font-bold text-brand-700 leading-none">{{ fmtTime(a.startTime) }}</p>
               <p class="text-[9px] text-brand-400 mt-0.5">{{ fmtTime(a.endTime) }}</p>
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-slate-900 truncate">{{ a.clientName }}</p>
-              <p class="text-xs text-slate-400 truncate">{{ a.service?.name }}</p>
+              <p class="text-sm font-medium text-slate-900 dark:text-white truncate">{{ a.clientName }}</p>
+              <p class="text-xs text-slate-400 dark:text-slate-500 truncate">{{ a.service?.name }}</p>
             </div>
-            <svg class="w-4 h-4 text-slate-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+            <svg class="w-4 h-4 text-slate-300 dark:text-slate-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
           </NuxtLink>
         </div>
         <div v-else class="py-10 text-center">
-          <p class="text-xs text-slate-400">Aucun rendez-vous ce jour</p>
+          <p class="text-xs text-slate-400 dark:text-slate-500">Aucun rendez-vous ce jour</p>
         </div>
       </div>
     </div>
 
     <!-- Desktop: week grid view -->
-    <div class="hidden sm:block bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden">
+    <div class="hidden sm:block bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-xs overflow-hidden">
       <div class="overflow-x-auto">
         <div class="min-w-[700px]">
           <!-- Day headers -->
-          <div class="grid grid-cols-8 border-b border-slate-100">
+          <div class="grid grid-cols-8 border-b border-slate-100 dark:border-slate-700">
             <div class="p-2 w-12" />
             <div v-for="d in weekDays" :key="d.toISOString()"
-              :class="['p-2 text-center border-l border-slate-50',
-                isToday(d) ? 'bg-brand-50/50' : '']">
-              <p class="text-[10px] text-slate-400 uppercase">{{ d.toLocaleDateString('fr-FR', { weekday: 'short' }).slice(0, 3) }}</p>
-              <p :class="['text-sm font-bold mt-0.5', isToday(d) ? 'text-brand-600' : 'text-slate-700']">{{ d.getDate() }}</p>
+              :class="['p-2 text-center border-l border-slate-50 dark:border-slate-700',
+                isToday(d) ? 'bg-brand-50/50 dark:bg-brand-500/5' : '']">
+              <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase">{{ d.toLocaleDateString('fr-FR', { weekday: 'short' }).slice(0, 3) }}</p>
+              <p :class="['text-sm font-bold mt-0.5', isToday(d) ? 'text-brand-600' : 'text-slate-700 dark:text-slate-200']">{{ d.getDate() }}</p>
             </div>
           </div>
 
@@ -127,16 +127,16 @@ const selectedDayApts = computed(() => aptsFor(selectedDay.value))
           <div class="relative grid grid-cols-8">
             <!-- Hours column -->
             <div>
-              <div v-for="h in hours" :key="h" class="h-[60px] border-b border-slate-50 px-1.5 py-0.5">
-                <span class="text-[10px] text-slate-400">{{ h }}h</span>
+              <div v-for="h in hours" :key="h" class="h-[60px] border-b border-slate-50 dark:border-slate-700 px-1.5 py-0.5">
+                <span class="text-[10px] text-slate-400 dark:text-slate-500">{{ h }}h</span>
               </div>
             </div>
             <!-- Day columns -->
-            <div v-for="d in weekDays" :key="d.toISOString()" :class="['relative border-l border-slate-50', isToday(d) ? 'bg-brand-50/20' : '']">
-              <div v-for="h in hours" :key="h" class="h-[60px] border-b border-slate-50" />
+            <div v-for="d in weekDays" :key="d.toISOString()" :class="['relative border-l border-slate-50 dark:border-slate-700', isToday(d) ? 'bg-brand-50/20 dark:bg-brand-500/5' : '']">
+              <div v-for="h in hours" :key="h" class="h-[60px] border-b border-slate-50 dark:border-slate-700" />
               <!-- Appointments -->
               <NuxtLink v-for="a in aptsFor(d)" :key="a.id" :to="`/dashboard/appointments/${a.id}`"
-                class="absolute left-0.5 right-0.5 bg-brand-100 border-l-2 border-brand-500 rounded px-1.5 py-0.5 overflow-hidden cursor-pointer hover:bg-brand-200 transition-colors"
+                class="absolute left-0.5 right-0.5 bg-brand-100 dark:bg-brand-500/20 border-l-2 border-brand-500 rounded px-1.5 py-0.5 overflow-hidden cursor-pointer hover:bg-brand-200 dark:hover:bg-brand-500/30 transition-colors"
                 :style="aptStyle(a)">
                 <p class="text-[10px] font-semibold text-brand-900 truncate leading-tight">{{ a.clientName }}</p>
                 <p class="text-[9px] text-brand-600 truncate leading-tight">{{ a.service?.name }}</p>
