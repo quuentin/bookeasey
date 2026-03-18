@@ -68,8 +68,8 @@ export async function completeOnboarding(professionalId: string, data: {
         data: {
           professionalId,
           name: service.name,
-          durationMinutes: service.durationMinutes,
-          price: service.price,
+          durationMinutes: Number(service.durationMinutes),
+          price: Number(service.price),
         },
       })
     }
@@ -78,7 +78,7 @@ export async function completeOnboarding(professionalId: string, data: {
     await tx.professional.update({
       where: { id: professionalId },
       data: {
-        bufferMinutes: data.bufferMinutes,
+        bufferMinutes: Number(data.bufferMinutes),
         onboardingDone: true,
       },
     })

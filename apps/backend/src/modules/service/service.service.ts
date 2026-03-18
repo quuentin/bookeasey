@@ -28,7 +28,11 @@ export async function createService(professionalId: string, plan: string, data: 
   return prisma.service.create({
     data: {
       professionalId,
-      ...data,
+      name: data.name,
+      description: data.description,
+      durationMinutes: Number(data.durationMinutes),
+      price: Number(data.price),
+      color: data.color,
     },
   })
 }

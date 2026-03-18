@@ -71,7 +71,7 @@ export async function updateSchedule(professionalId: string, calendarId: string,
     if (data.bufferMinutes !== undefined) {
       await tx.professional.update({
         where: { id: professionalId },
-        data: { bufferMinutes: data.bufferMinutes },
+        data: { bufferMinutes: Number(data.bufferMinutes) },
       })
     }
   })

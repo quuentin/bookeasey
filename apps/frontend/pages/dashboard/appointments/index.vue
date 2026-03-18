@@ -1,42 +1,79 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'dashboard', middleware: 'auth' })
-const { $api } = useNuxtApp(); const statusFilter = ref('all'); const page = ref(1)
-const { data: appointments, refresh } = useAsyncData('appointments', () => $api<any>('/appointments', { query: { status: statusFilter.value === 'all' ? undefined : statusFilter.value, page: page.value, limit: 20 } }), { watch: [statusFilter, page] })
+const { $api } = useNuxtApp()
+const statusFilter = ref('all')
+const page = ref(1)
+
+const { data: appointments, refresh } = useAsyncData('appointments', () =>
+  $api<any>('/appointments', { query: { status: statusFilter.value === 'all' ? undefined : statusFilter.value, page: page.value, limit: 20 } }),
+  { watch: [statusFilter, page] }
+)
+
 function fmtDate(d: string) { return new Date(d).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' }) }
 function fmtTime(d: string) { return new Date(d).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) }
-const sLabels: Record<string,string> = { CONFIRMED:'Confirmé', CANCELLED:'Annulé', COMPLETED:'Terminé', NO_SHOW:'Absent' }
-const sVariants: Record<string,string> = { CONFIRMED:'success', CANCELLED:'danger', COMPLETED:'neutral', NO_SHOW:'warning' }
+const sLabels: Record<string, string> = { CONFIRMED: 'Confirmé', CANCELLED: 'Annulé', COMPLETED: 'Terminé', NO_SHOW: 'Absent' }
+const sVariants: Record<string, string> = { CONFIRMED: 'success', CANCELLED: 'danger', COMPLETED: 'neutral', NO_SHOW: 'warning' }
 async function updateStatus(id: string, status: string) { await $api(`/appointments/${id}/status`, { method: 'PUT', body: { status } }); refresh() }
 </script>
 
 <template>
   <div class="space-y-6">
-    <div class="flex items-center justify-between">
-      <h2 class="text-heading-1 text-slate-900">Rendez-vous</h2>
-      <div class="flex gap-1 p-1 bg-slate-100 rounded-xl">
-        <button v-for="f in ['all','CONFIRMED','COMPLETED','CANCELLED']" :key="f"
-          :class="['px-3 py-1.5 rounded-lg text-body-sm font-medium transition-colors', statusFilter === f ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-700']"
-          @click="statusFilter = f">{{ f === 'all' ? 'Tous' : sLabels[f] }}</button>
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div>
+        <h2 class="text-lg sm:text-xl font-bold text-slate-900">Rendez-vous</h2>
+        <p class="text-sm text-slate-500 mt-0.5">{{ appointments?.total ?? 0 }} rendez-vous au total</p>
+      </div>
+      <div class="flex gap-1 p-1 bg-slate-100 rounded-xl self-start">
+        <button v-for="f in ['all', 'CONFIRMED', 'COMPLETED', 'CANCELLED']" :key="f"
+          :class="['px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all',
+            statusFilter === f ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-700']"
+          @click="statusFilter = f">
+          {{ f === 'all' ? 'Tous' : sLabels[f] }}
+        </button>
       </div>
     </div>
-    <div class="card">
-      <div v-if="appointments?.data?.length" class="divide-y divide-slate-100">
-        <div v-for="apt in appointments.data" :key="apt.id" class="flex items-center justify-between p-4 hover:bg-slate-50 transition-colors">
-          <div class="flex items-center gap-4">
-            <div class="text-center min-w-[70px]"><p class="text-body-sm text-slate-400">{{ fmtDate(apt.startTime) }}</p><p class="text-heading-3 text-slate-900">{{ fmtTime(apt.startTime) }}</p></div>
-            <div class="w-px h-8 bg-slate-150" />
-            <div><p class="font-medium text-slate-800">{{ apt.clientName }}</p><p class="text-body-sm text-slate-400">{{ apt.service?.name }} · {{ apt.clientEmail }}</p></div>
+
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden">
+      <div v-if="appointments?.data?.length" class="divide-y divide-slate-50">
+        <div v-for="apt in appointments.data" :key="apt.id" class="flex items-center justify-between px-4 sm:px-6 py-3.5 hover:bg-slate-50/50 transition-colors">
+          <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+            <div class="w-12 h-12 rounded-xl bg-slate-50 flex flex-col items-center justify-center shrink-0 border border-slate-100">
+              <p class="text-[10px] text-slate-400 leading-none">{{ fmtDate(apt.startTime).split(' ')[0] }}</p>
+              <p class="text-sm font-bold text-slate-900 leading-none mt-0.5">{{ fmtDate(apt.startTime).split(' ')[1] }}</p>
+              <p class="text-[10px] text-slate-400 leading-none">{{ fmtDate(apt.startTime).split(' ')[2] }}</p>
+            </div>
+            <div class="min-w-0">
+              <p class="text-sm font-medium text-slate-900 truncate">{{ apt.clientName }}</p>
+              <p class="text-xs text-slate-400 mt-0.5 flex items-center gap-2">
+                <span class="flex items-center gap-1">
+                  <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  {{ fmtTime(apt.startTime) }}
+                </span>
+                <span class="hidden sm:inline">{{ apt.service?.name }}</span>
+              </p>
+            </div>
           </div>
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2 sm:gap-3 shrink-0 ml-2">
             <AppBadge :variant="(sVariants[apt.status] as any)" size="sm">{{ sLabels[apt.status] }}</AppBadge>
-            <div v-if="apt.status === 'CONFIRMED'" class="flex gap-2 text-body-sm">
-              <button class="text-emerald-600 hover:underline" @click="updateStatus(apt.id, 'COMPLETED')">Terminer</button>
-              <button class="text-red-500 hover:underline" @click="updateStatus(apt.id, 'CANCELLED')">Annuler</button>
+            <div v-if="apt.status === 'CONFIRMED'" class="hidden sm:flex gap-1">
+              <button class="p-1.5 rounded-lg hover:bg-emerald-50 text-slate-400 hover:text-emerald-600 transition-colors" title="Terminer" @click="updateStatus(apt.id, 'COMPLETED')">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+              </button>
+              <button class="p-1.5 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors" title="Annuler" @click="updateStatus(apt.id, 'CANCELLED')">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <div v-else class="text-center py-16"><p class="text-slate-400">Aucun rendez-vous trouvé</p></div>
+
+      <div v-else class="px-6 py-14 text-center">
+        <div class="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        </div>
+        <p class="text-sm font-medium text-slate-500 mb-1">Aucun rendez-vous</p>
+        <p class="text-xs text-slate-400">Les réservations de vos clients apparaîtront ici</p>
+      </div>
     </div>
   </div>
 </template>
