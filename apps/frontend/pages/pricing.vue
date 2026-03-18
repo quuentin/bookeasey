@@ -6,7 +6,7 @@ const plans = [
   { name: 'Gratuit', price: '0€', period: 'pour toujours', highlighted: false,
     features: ['1 calendrier', '5 services max', 'Page publique de réservation', 'Rappels email automatiques', 'Statistiques basiques'],
     cta: 'Commencer gratuitement', to: '/register' },
-  { name: 'Premium', price: '12€', period: '/ mois', highlighted: true,
+  { name: 'Premium', price: '12€', period: 'HT / mois', highlighted: true,
     features: ['Calendriers illimités (1 par employé)', 'Services illimités', 'Page sans branding BookEasy', 'Rappels SMS', 'Paiement en ligne (Stripe)', 'Synchro Google Calendar', 'Formulaire pré-RDV personnalisé', 'Domaine personnalisé', 'Stats détaillées + export'],
     cta: 'Passer Premium', to: '/register' },
 ]

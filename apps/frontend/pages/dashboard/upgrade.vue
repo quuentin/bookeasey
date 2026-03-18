@@ -45,7 +45,7 @@ async function handleUpgrade() {
         <p class="text-white/70 text-sm font-medium mb-2">Premium</p>
         <div class="flex items-baseline justify-center gap-1 mb-2">
           <span class="text-4xl sm:text-5xl font-extrabold text-white">12€</span>
-          <span class="text-white/60 text-base">/mois</span>
+          <span class="text-white/60 text-base"> HT/mois</span>
         </div>
         <p class="text-white/50 text-sm">Sans engagement, annulez à tout moment</p>
       </div>

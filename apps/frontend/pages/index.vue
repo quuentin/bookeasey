@@ -109,9 +109,9 @@ const targetAudiences = [
 
 const faqs = [
   { q: 'C\'est vraiment gratuit ?', a: 'Oui, le plan gratuit est gratuit pour toujours. Il inclut 1 calendrier, 5 services, les rappels email et votre page publique. Aucune carte bancaire demandée.' },
-  { q: 'En quoi c\'est différent de Calendly ou Planity ?', a: 'Calendly est fait pour les réunions en entreprise, Planity pour les gros salons avec caisse enregistreuse. Leurs tarifs sont opaques (il faut demander un devis ou passer un appel commercial) et leurs outils sont complexes. BookEasy c\'est l\'inverse : tarifs affichés (0€ ou 12€/mois, point final), un outil simple qui se configure en 5 minutes, pensé pour les indépendants de tous les métiers.' },
+  { q: 'En quoi c\'est différent de Calendly ou Planity ?', a: 'Calendly est fait pour les réunions en entreprise, Planity pour les gros salons avec caisse enregistreuse. Leurs tarifs sont opaques (il faut demander un devis ou passer un appel commercial) et leurs outils sont complexes. BookEasy c\'est l\'inverse : tarifs affichés (0€ ou 12€ HT/mois, point final), un outil simple qui se configure en 5 minutes, pensé pour les indépendants de tous les métiers.' },
   { q: 'Mes clients doivent créer un compte ?', a: 'Non. Ils entrent leur nom, email et téléphone, c\'est tout. Aucune appli à télécharger, aucun mot de passe à retenir.' },
-  { q: 'Je peux encaisser des paiements ?', a: 'Oui, avec le plan Premium à 12€/mois. Vous choisissez entre acompte ou paiement total via Stripe. C\'est la meilleure arme contre les absences.' },
+  { q: 'Je peux encaisser des paiements ?', a: 'Oui, avec le plan Premium à 12€ HT/mois. Vous choisissez entre acompte ou paiement total via Stripe. C\'est la meilleure arme contre les absences.' },
   { q: 'Combien de temps pour créer ma page ?', a: 'Moins de 5 minutes. Vous renseignez vos horaires, ajoutez vos services, et votre page est en ligne immédiatement. Aucune compétence technique requise.' },
   { q: 'Je peux l\'utiliser si j\'ai déjà un site web ?', a: 'Oui. Vous pouvez ajouter votre lien BookEasy sur votre site existant, ou l\'utiliser comme page autonome si vous n\'avez pas de site.' },
   { q: 'Est-ce que mes données sont sécurisées ?', a: 'Oui. Vos données sont hébergées en France, les paiements sont gérés par Stripe (leader mondial), et nous n\'avons aucun accès à vos données bancaires.' },
@@ -371,7 +371,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
         <div class="text-center mb-10 sm:mb-14">
           <p class="text-brand-600 font-semibold text-sm mb-2">COMPARATIF</p>
           <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">BookEasy vs. Calendly, Planity & co</h2>
-          <p class="text-base sm:text-lg text-slate-500 max-w-xl mx-auto">Tarifs opaques, outils complexes, appels commerciaux obligatoires. Nous, c'est simple : 0€ ou 12€/mois, en ligne en 5 minutes.</p>
+          <p class="text-base sm:text-lg text-slate-500 max-w-xl mx-auto">Tarifs opaques, outils complexes, appels commerciaux obligatoires. Nous, c'est simple : 0€ ou 12€ HT/mois, en ligne en 5 minutes.</p>
         </div>
         <div class="card overflow-hidden">
           <table class="w-full text-left">
@@ -488,7 +488,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
           <div class="card p-6 text-center ring-2 ring-brand-500 flex flex-col">
             <div class="mb-2"><span class="text-[10px] font-semibold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-full">POPULAIRE</span></div>
             <h3 class="text-lg font-semibold text-slate-900 mb-1">Premium</h3>
-            <p class="text-3xl font-extrabold text-slate-900 mb-1">12€<span class="text-base font-normal text-slate-400">/mois</span></p>
+            <p class="text-3xl font-extrabold text-slate-900 mb-1">12€<span class="text-base font-normal text-slate-400"> HT/mois</span></p>
             <p class="text-sm text-slate-400 mb-5">sans engagement</p>
             <ul class="text-sm text-slate-600 space-y-2 text-left mb-6 flex-1">
               <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>Tout le plan Gratuit</li>
