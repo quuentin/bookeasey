@@ -71,6 +71,7 @@ model Professional {
   customForms        CustomForm[]
   notifications      Notification[]
   googleCalendarSync GoogleCalendarSync?
+  clients            Client[]
 
   @@index([slug])
   @@map("professionals")
@@ -319,4 +320,26 @@ model GoogleCalendarSync {
   updatedAt          DateTime     @updatedAt
 
   @@map("google_calendar_syncs")
+}
+
+// ─── CLIENTS (FICHES CLIENTS) ───────────────────────────
+
+model Client {
+  id             String       @id @default(cuid())
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  name           String
+  email          String
+  phone          String?
+  notes          String?
+  tags           String[]     @default([])
+  totalVisits    Int          @default(0)
+  totalSpent     Decimal      @default(0) @db.Decimal(10, 2)
+  lastVisitAt    DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([professionalId, email])
+  @@index([professionalId])
+  @@map("clients")
 }

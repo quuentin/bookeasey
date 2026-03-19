@@ -2,6 +2,7 @@ import { prisma } from '../../config/database.js'
 import { NotFoundError, ConflictError, ValidationError } from '../../utils/errors.js'
 import { getAvailableSlots } from '../availability/availability.service.js'
 import { hasOverlap } from '../../utils/time.js'
+import { getOrCreateClient } from '../client/client.service.js'
 
 export async function getPublicProfile(slug: string) {
   const pro = await prisma.professional.findUnique({
@@ -157,6 +158,19 @@ export async function createBooking(slug: string, data: {
 
     return apt
   })
+
+  // Auto-create or update client record (async, outside transaction)
+  try {
+    await getOrCreateClient(
+      pro.id,
+      data.clientName,
+      data.clientEmail,
+      data.clientPhone,
+      Number(service.price),
+    )
+  } catch (e) {
+    console.error('Failed to create/update client record:', e)
+  }
 
   // TODO: Send confirmation emails (async, outside transaction)
 

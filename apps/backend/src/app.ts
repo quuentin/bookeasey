@@ -16,6 +16,7 @@ import employeeRoutes from './modules/employee/employee.routes.js'
 import statsRoutes from './modules/stats/stats.routes.js'
 import formRoutes from './modules/custom-form/form.routes.js'
 import gcalRoutes from './modules/google-calendar/gcal.routes.js'
+import clientRoutes from './modules/client/client.routes.js'
 
 export function createApp() {
   const app = express()
@@ -45,6 +46,7 @@ export function createApp() {
   app.use('/api/v1/stats', statsRoutes)
   app.use('/api/v1/forms', formRoutes)
   app.use('/api/v1/gcal', gcalRoutes)
+  app.use('/api/v1/clients', clientRoutes)
 
   // Error handler
   app.use(errorHandler)
