@@ -1,5 +1,5 @@
 {
-  "name": "bookeasey",
+  "name": "slotybook",
   "private": true,
   "workspaces": [
     "apps/*",

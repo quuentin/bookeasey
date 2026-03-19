@@ -1,5 +1,5 @@
 <template>
-  <MockBrowser url="bookeasey.fr/dashboard">
+  <MockBrowser url="slotybook.com/dashboard">
     <div class="flex min-h-[280px] sm:min-h-[320px]">
       <!-- Mini sidebar -->
       <div class="w-12 sm:w-14 bg-slate-50 border-r border-slate-100 py-3 flex flex-col items-center gap-3 shrink-0">

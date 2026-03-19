@@ -8,8 +8,8 @@
             <span class="text-brand-700 font-bold text-xs">B</span>
           </div>
           <div class="min-w-0">
-            <p class="text-xs sm:text-sm font-semibold text-slate-900">BookEasy</p>
-            <p class="text-[10px] sm:text-[11px] text-slate-400 truncate">noreply@bookeasey.fr</p>
+            <p class="text-xs sm:text-sm font-semibold text-slate-900">SlotyBook</p>
+            <p class="text-[10px] sm:text-[11px] text-slate-400 truncate">noreply@slotybook.com</p>
           </div>
           <span class="ml-auto text-[10px] sm:text-[11px] text-slate-400 shrink-0">14:32</span>
         </div>
@@ -36,7 +36,7 @@
         <span class="text-[10px] sm:text-[11px] text-slate-400 font-medium">SMS · Rappel automatique J-1</span>
       </div>
       <div class="bg-emerald-500/10 rounded-lg px-3 py-2 inline-block max-w-[85%]">
-        <p class="text-[11px] sm:text-xs text-emerald-100 leading-relaxed">Rappel : RDV demain à 14h00 chez Salon Marie (Coloration). À demain ! — BookEasy</p>
+        <p class="text-[11px] sm:text-xs text-emerald-100 leading-relaxed">Rappel : RDV demain à 14h00 chez Salon Marie (Coloration). À demain ! — SlotyBook</p>
       </div>
     </div>
   </div>

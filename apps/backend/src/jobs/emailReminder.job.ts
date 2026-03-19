@@ -56,7 +56,7 @@ export async function processEmailReminders(): Promise<void> {
       const isPremium = apt.professional.subscription?.plan === 'PREMIUM'
       if (isPremium && apt.clientPhone && !apt.smsReminderSent) {
         try {
-          const smsMessage = `Rappel : RDV "${apt.service.name}" demain à ${timeStr} chez ${apt.professional.businessName}. — BookEasy`
+          const smsMessage = `Rappel : RDV "${apt.service.name}" demain à ${timeStr} chez ${apt.professional.businessName}. — SlotyBook`
           await sendSMS(apt.clientPhone, smsMessage)
 
           await prisma.appointment.update({

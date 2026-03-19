@@ -5,7 +5,7 @@ export const config = {
   frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3000',
 
   database: {
-    url: process.env.DATABASE_URL || 'postgresql://bookeasey:bookeasey_dev@localhost:5432/bookeasey',
+    url: process.env.DATABASE_URL || 'postgresql://slotybook:slotybook_dev@localhost:5432/slotybook',
   },
 
   redis: {
@@ -27,7 +27,7 @@ export const config = {
 
   email: {
     resendApiKey: process.env.RESEND_API_KEY || '',
-    from: process.env.EMAIL_FROM || 'BookEasy <noreply@bookeasey.fr>',
+    from: process.env.EMAIL_FROM || 'SlotyBook <noreply@slotybook.com>',
   },
 
   sms: {

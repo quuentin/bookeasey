@@ -21,7 +21,7 @@ async function handleRegister() {
   <div>
     <div class="lg:hidden flex items-center gap-2 mb-8">
       <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center"><span class="text-white font-bold text-sm">B</span></div>
-      <span class="font-bold text-lg text-slate-900">BookEasy</span>
+      <span class="font-bold text-lg text-slate-900">SlotyBook</span>
     </div>
     <h1 class="text-heading-1 text-slate-900 mb-1">Créer mon compte</h1>
     <p class="text-body text-slate-500 mb-8">Gratuit, sans engagement</p>

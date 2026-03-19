@@ -58,7 +58,7 @@ function handleLogout() {
         <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center shrink-0">
           <span class="text-white font-bold text-sm">B</span>
         </div>
-        <span class="font-bold text-slate-900 dark:text-white">BookEasy</span>
+        <span class="font-bold text-slate-900 dark:text-white">SlotyBook</span>
         <AppBadge v-if="authStore.isPremium" variant="brand" size="sm" class="ml-auto">PRO</AppBadge>
       </div>
 

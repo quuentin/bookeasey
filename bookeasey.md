@@ -1,4 +1,4 @@
-# BookEasy — Plateforme de prise de RDV en ligne
+# SlotyBook — Plateforme de prise de RDV en ligne
 
 ## Le concept
 
@@ -18,13 +18,13 @@ Coiffeurs, coachs, thérapeutes, consultants, professeurs particuliers, photogra
    - Quelles sont tes horaires ? (ex: lun-ven 9h-18h)
    - Quels services proposes-tu ? (ex: "Coupe homme — 30 min — 25€", "Coloration — 1h30 — 80€")
    - Pause entre chaque RDV ? (ex: 15 min)
-3. **Sa page publique est générée** → `bookeasey.fr/salon-marie` — il la partage sur Instagram, Google, sa vitrine...
+3. **Sa page publique est générée** → `slotybook.fr/salon-marie` — il la partage sur Instagram, Google, sa vitrine...
 
 ---
 
 ## Parcours du client (réservation)
 
-1. Le client arrive sur `bookeasey.fr/salon-marie`
+1. Le client arrive sur `slotybook.fr/salon-marie`
 2. Il voit les services proposés, choisit "Coupe femme — 45 min — 35€"
 3. Un calendrier affiche les créneaux disponibles (les créneaux déjà pris sont masqués)
 4. Il choisit "Jeudi 19 mars à 14h00"
@@ -48,14 +48,14 @@ Coiffeurs, coachs, thérapeutes, consultants, professeurs particuliers, photogra
 | Fonctionnalité | Gratuit | Premium (12€/mois) |
 |---|---|---|
 | Calendriers/agendas | 1 | Illimités (1 par employé) |
-| Page publique de réservation | Oui (avec branding "Propulsé par BookEasy") | Oui (branding retiré) |
+| Page publique de réservation | Oui (avec branding "Propulsé par SlotyBook") | Oui (branding retiré) |
 | Services configurables | 5 max | Illimités |
 | Rappels email automatiques | Oui | Oui |
 | Rappels SMS | Non | Oui |
 | Paiement en ligne (acompte ou total) | Non | Oui (Stripe) |
 | Synchro Google Calendar | Non | Oui (bidirectionnelle) |
 | Formulaire personnalisé (questions avant RDV) | Non | Oui |
-| Domaine personnalisé | Non (`bookeasey.fr/slug`) | Oui (`rdv.monsalon.fr`) |
+| Domaine personnalisé | Non (`slotybook.fr/slug`) | Oui (`rdv.monsalon.fr`) |
 | Stats (nb de RDV, taux d'annulation, revenus) | Basiques | Détaillées + export |
 
 ---
@@ -63,7 +63,7 @@ Coiffeurs, coachs, thérapeutes, consultants, professeurs particuliers, photogra
 ## Modèle de revenus
 
 - Le pro s'inscrit gratuitement → il teste, il adopte
-- Sa page publique affiche **"Propulsé par BookEasy"** → ses clients voient la marque → d'autres pros s'inscrivent (boucle virale)
+- Sa page publique affiche **"Propulsé par SlotyBook"** → ses clients voient la marque → d'autres pros s'inscrivent (boucle virale)
 - Quand il a 2 employés → il doit passer premium pour avoir 2 calendriers
 - Quand il veut réduire les no-shows → il passe premium pour les rappels SMS
 - Quand il veut des acomptes → premium pour le paiement en ligne
@@ -81,7 +81,7 @@ Coiffeurs, coachs, thérapeutes, consultants, professeurs particuliers, photogra
 
 ## Avantage concurrentiel
 
-Chaque utilisateur gratuit ramène ses propres clients sur la plateforme = **croissance virale organique**. Chaque page publique de réservation est une porte d'entrée SEO vers BookEasy.
+Chaque utilisateur gratuit ramène ses propres clients sur la plateforme = **croissance virale organique**. Chaque page publique de réservation est une porte d'entrée SEO vers SlotyBook.
 
 ---
 

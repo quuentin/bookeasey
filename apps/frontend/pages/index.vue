@@ -94,7 +94,7 @@ const comparisons = [
 
 const testimonials = [
   { name: 'Marie L.', role: 'Coiffeuse', city: 'Paris', text: 'Je passais 30 min par jour au téléphone pour les RDV. Aujourd\'hui mes clientes réservent depuis Instagram. Je ne reviendrais en arrière pour rien au monde.', stat: '2h/sem gagnées', statDetail: 'sur la gestion des RDV' },
-  { name: 'Thomas R.', role: 'Coach sportif', city: 'Lyon', text: 'Impossible d\'afficher mes tarifs ou demander un acompte avec les autres outils. Avec BookEasy, mes clients paient à la réservation. Résultat : zéro no-show.', stat: '0 no-show', statDetail: 'depuis 3 mois' },
+  { name: 'Thomas R.', role: 'Coach sportif', city: 'Lyon', text: 'Impossible d\'afficher mes tarifs ou demander un acompte avec les autres outils. Avec SlotyBook, mes clients paient à la réservation. Résultat : zéro no-show.', stat: '0 no-show', statDetail: 'depuis 3 mois' },
   { name: 'Sophie M.', role: 'Thérapeute', city: 'Bordeaux', text: 'Mes patients réservent à 23h depuis leur canapé. Le matin, mon planning est rempli sans que j\'aie rien fait. C\'est magique.', stat: '+40%', statDetail: 'de réservations' },
 ]
 
@@ -109,11 +109,11 @@ const targetAudiences = [
 
 const faqs = [
   { q: 'C\'est vraiment gratuit ?', a: 'Oui, le plan gratuit est gratuit pour toujours. Il inclut 1 calendrier, 5 services, les rappels email et votre page publique. Aucune carte bancaire demandée.' },
-  { q: 'En quoi c\'est différent de Calendly ou Planity ?', a: 'Calendly est fait pour les réunions en entreprise, Planity pour les gros salons avec caisse enregistreuse. Leurs tarifs sont opaques (il faut demander un devis ou passer un appel commercial) et leurs outils sont complexes. BookEasy c\'est l\'inverse : tarifs affichés (0€ ou 12€ HT/mois, point final), un outil simple qui se configure en 5 minutes, pensé pour les indépendants de tous les métiers.' },
+  { q: 'En quoi c\'est différent de Calendly ou Planity ?', a: 'Calendly est fait pour les réunions en entreprise, Planity pour les gros salons avec caisse enregistreuse. Leurs tarifs sont opaques (il faut demander un devis ou passer un appel commercial) et leurs outils sont complexes. SlotyBook c\'est l\'inverse : tarifs affichés (0€ ou 12€ HT/mois, point final), un outil simple qui se configure en 5 minutes, pensé pour les indépendants de tous les métiers.' },
   { q: 'Mes clients doivent créer un compte ?', a: 'Non. Ils entrent leur nom, email et téléphone, c\'est tout. Aucune appli à télécharger, aucun mot de passe à retenir.' },
   { q: 'Je peux encaisser des paiements ?', a: 'Oui, avec le plan Premium à 12€ HT/mois. Vous choisissez entre acompte ou paiement total via Stripe. C\'est la meilleure arme contre les absences.' },
   { q: 'Combien de temps pour créer ma page ?', a: 'Moins de 5 minutes. Vous renseignez vos horaires, ajoutez vos services, et votre page est en ligne immédiatement. Aucune compétence technique requise.' },
-  { q: 'Je peux l\'utiliser si j\'ai déjà un site web ?', a: 'Oui. Vous pouvez ajouter votre lien BookEasy sur votre site existant, ou l\'utiliser comme page autonome si vous n\'avez pas de site.' },
+  { q: 'Je peux l\'utiliser si j\'ai déjà un site web ?', a: 'Oui. Vous pouvez ajouter votre lien SlotyBook sur votre site existant, ou l\'utiliser comme page autonome si vous n\'avez pas de site.' },
   { q: 'Est-ce que mes données sont sécurisées ?', a: 'Oui. Vos données sont hébergées en France, les paiements sont gérés par Stripe (leader mondial), et nous n\'avons aucun accès à vos données bancaires.' },
 ]
 
@@ -130,7 +130,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
           <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center">
             <span class="text-white font-bold text-sm">B</span>
           </div>
-          <span class="font-bold text-lg text-slate-900">BookEasy</span>
+          <span class="font-bold text-lg text-slate-900">SlotyBook</span>
         </NuxtLink>
         <div class="hidden sm:flex items-center gap-2">
           <NuxtLink to="/pricing" class="btn-ghost text-body-sm">Tarifs</NuxtLink>
@@ -220,7 +220,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
                 <div class="w-7 h-7 rounded-full bg-amber-300 border-2 border-brand-900 flex items-center justify-center text-[9px] font-bold text-amber-900">S</div>
                 <div class="w-7 h-7 rounded-full bg-sky-300 border-2 border-brand-900 flex items-center justify-center text-[9px] font-bold text-sky-900">L</div>
               </div>
-              <p class="text-xs text-white/40"><span class="text-white/70 font-semibold">+2 500 pros</span> utilisent déjà BookEasy</p>
+              <p class="text-xs text-white/40"><span class="text-white/70 font-semibold">+2 500 pros</span> utilisent déjà SlotyBook</p>
             </div>
           </div>
 
@@ -262,7 +262,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
     <section class="py-14 sm:py-20 px-4 sm:px-6 bg-slate-50">
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-10 sm:mb-14">
-          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Ce qui change avec BookEasy</h2>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Ce qui change avec SlotyBook</h2>
           <p class="text-base sm:text-lg text-slate-500 mt-3 max-w-lg mx-auto">Rejoignez les professionnels qui ont simplifié leur quotidien.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -281,7 +281,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
           <div class="rounded-2xl bg-white border border-emerald-100 p-6 ring-1 ring-emerald-200">
             <div class="flex items-center gap-2 mb-5">
               <span class="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500 text-sm font-bold">✓</span>
-              <h3 class="font-semibold text-slate-900">Avec BookEasy</h3>
+              <h3 class="font-semibold text-slate-900">Avec SlotyBook</h3>
             </div>
             <ul class="space-y-3">
               <li v-for="item in ['Vos clients réservent seuls, 24h/24, 7j/7','Votre agenda se remplit automatiquement','Rappels email et SMS, plus d\'oublis','Paiement à la réservation, plus de no-shows','Votre propre page pro visible sur Google']" :key="item" class="flex items-start gap-2.5 text-sm text-slate-700">
@@ -350,7 +350,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
         <div class="text-center mb-10 sm:mb-14">
           <p class="text-brand-600 font-semibold text-sm mb-2">POUR QUI</p>
           <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Quel que soit votre métier</h2>
-          <p class="text-base sm:text-lg text-slate-500 max-w-xl mx-auto">Si vous prenez des rendez-vous, BookEasy est fait pour vous.</p>
+          <p class="text-base sm:text-lg text-slate-500 max-w-xl mx-auto">Si vous prenez des rendez-vous, SlotyBook est fait pour vous.</p>
         </div>
         <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           <div v-for="(a, i) in targetAudiences" :key="i" class="card p-4 sm:p-5">
@@ -370,7 +370,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-10 sm:mb-14">
           <p class="text-brand-600 font-semibold text-sm mb-2">COMPARATIF</p>
-          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">BookEasy vs. Calendly, Planity & co</h2>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">SlotyBook vs. Calendly, Planity & co</h2>
           <p class="text-base sm:text-lg text-slate-500 max-w-xl mx-auto">Tarifs opaques, outils complexes, appels commerciaux obligatoires. Nous, c'est simple : 0€ ou 12€ HT/mois, en ligne en 5 minutes.</p>
         </div>
         <div class="card overflow-hidden">
@@ -378,7 +378,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
             <thead>
               <tr class="border-b border-slate-100 bg-slate-50">
                 <th class="px-4 sm:px-6 py-3.5 text-sm font-semibold text-slate-700">Fonctionnalité</th>
-                <th class="px-4 sm:px-6 py-3.5 text-sm font-semibold text-brand-700 text-center">BookEasy</th>
+                <th class="px-4 sm:px-6 py-3.5 text-sm font-semibold text-brand-700 text-center">SlotyBook</th>
                 <th class="px-4 sm:px-6 py-3.5 text-sm font-semibold text-slate-400 text-center">Les autres</th>
               </tr>
             </thead>
@@ -406,7 +406,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-10 sm:mb-14">
           <p class="text-brand-600 font-semibold text-sm mb-2">TÉMOIGNAGES</p>
-          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Ils ont choisi BookEasy</h2>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Ils ont choisi SlotyBook</h2>
           <div class="flex items-center justify-center gap-2 mt-4">
             <div class="flex gap-0.5">
               <svg v-for="s in 5" :key="s" class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
@@ -552,7 +552,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
           <div>
             <div class="flex items-center gap-2 mb-2">
               <div class="w-7 h-7 rounded-md bg-brand-600 flex items-center justify-center"><span class="text-white font-bold text-xs">B</span></div>
-              <span class="font-bold text-white">BookEasy</span>
+              <span class="font-bold text-white">SlotyBook</span>
             </div>
             <p class="text-sm text-slate-400">La prise de rendez-vous en ligne pour les indépendants.</p>
           </div>
@@ -563,7 +563,7 @@ function toggleFaq(i: number) { openFaq.value = openFaq.value === i ? null : i }
           </div>
         </div>
         <div class="border-t border-slate-800 mt-8 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500">
-          <span>&copy; {{ new Date().getFullYear() }} BookEasy. Tous droits réservés.</span>
+          <span>&copy; {{ new Date().getFullYear() }} SlotyBook. Tous droits réservés.</span>
           <div class="flex flex-wrap gap-4">
             <NuxtLink to="/mentions-legales" class="hover:text-slate-300 transition-colors">Mentions légales</NuxtLink>
             <NuxtLink to="/cgu" class="hover:text-slate-300 transition-colors">CGU</NuxtLink>

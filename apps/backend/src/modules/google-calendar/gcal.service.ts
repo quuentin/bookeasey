@@ -138,7 +138,7 @@ export async function pushEvent(appointment: {
       timeZone: 'Europe/Paris',
     },
     attendees: [{ email: appointment.clientEmail }],
-    description: `Rendez-vous BookEasy\nClient: ${appointment.clientName}\nService: ${appointment.service.name}`,
+    description: `Rendez-vous SlotyBook\nClient: ${appointment.clientName}\nService: ${appointment.service.name}`,
   }
 
   let googleEventId = appointment.googleEventId

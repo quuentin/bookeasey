@@ -1,5 +1,5 @@
 <template>
-  <MockBrowser url="bookeasey.fr/salon-marie">
+  <MockBrowser url="slotybook.com/salon-marie">
     <div class="p-4 sm:p-6">
       <!-- Service recap -->
       <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-100">

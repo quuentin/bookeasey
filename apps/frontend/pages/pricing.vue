@@ -7,7 +7,7 @@ const plans = [
     features: ['1 calendrier', '5 services max', 'Page publique de réservation', 'Rappels email automatiques', 'Statistiques basiques'],
     cta: 'Commencer gratuitement', to: '/register' },
   { name: 'Premium', price: '12€', period: 'HT / mois', highlighted: true,
-    features: ['Calendriers illimités (1 par employé)', 'Services illimités', 'Page sans branding BookEasy', 'Rappels SMS', 'Paiement en ligne (Stripe)', 'Synchro Google Calendar', 'Formulaire pré-RDV personnalisé', 'Domaine personnalisé', 'Stats détaillées + export'],
+    features: ['Calendriers illimités (1 par employé)', 'Services illimités', 'Page sans branding SlotyBook', 'Rappels SMS', 'Paiement en ligne (Stripe)', 'Synchro Google Calendar', 'Formulaire pré-RDV personnalisé', 'Domaine personnalisé', 'Stats détaillées + export'],
     cta: 'Passer Premium', to: '/register' },
 ]
 </script>
@@ -21,7 +21,7 @@ const plans = [
           <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center">
             <span class="text-white font-bold text-sm">B</span>
           </div>
-          <span class="font-bold text-lg text-slate-900">BookEasy</span>
+          <span class="font-bold text-lg text-slate-900">SlotyBook</span>
         </NuxtLink>
         <!-- Desktop nav -->
         <div class="hidden sm:flex items-center gap-2">

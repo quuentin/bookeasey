@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'default' })
-useHead({ title: 'Politique de confidentialité - BookEasy' })
+useHead({ title: 'Politique de confidentialité - SlotyBook' })
 </script>
 
 <template>
@@ -9,7 +9,7 @@ useHead({ title: 'Politique de confidentialité - BookEasy' })
       <div class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center">
         <NuxtLink to="/" class="flex items-center gap-2">
           <div class="w-7 h-7 rounded-md bg-brand-600 flex items-center justify-center"><span class="text-white font-bold text-xs">B</span></div>
-          <span class="font-bold text-slate-900">BookEasy</span>
+          <span class="font-bold text-slate-900">SlotyBook</span>
         </NuxtLink>
       </div>
     </nav>
@@ -22,7 +22,7 @@ useHead({ title: 'Politique de confidentialité - BookEasy' })
         <section>
           <h2 class="text-lg font-semibold text-slate-900">1. Responsable du traitement</h2>
           <p>Le responsable du traitement des données est la société Innov'Dev, EURL, dont le siège social est situé au 200 Rue De La Croix Nivert, 75015 Paris, France.</p>
-          <p>Contact : <strong>contact@bookeasey.fr</strong></p>
+          <p>Contact : <strong>contact@slotybook.com</strong></p>
         </section>
 
         <section>
@@ -103,7 +103,7 @@ useHead({ title: 'Politique de confidentialité - BookEasy' })
             <li><strong>Droit d'opposition :</strong> vous opposer au traitement de vos données</li>
             <li><strong>Droit à la limitation :</strong> limiter le traitement de vos données</li>
           </ul>
-          <p>Pour exercer vos droits, contactez-nous à : <strong>contact@bookeasey.fr</strong></p>
+          <p>Pour exercer vos droits, contactez-nous à : <strong>contact@slotybook.com</strong></p>
           <p>Vous avez également le droit d'introduire une réclamation auprès de la CNIL (cnil.fr).</p>
         </section>
 
@@ -119,7 +119,7 @@ useHead({ title: 'Politique de confidentialité - BookEasy' })
 
         <section>
           <h2 class="text-lg font-semibold text-slate-900">11. Contact</h2>
-          <p>Pour toute question relative à la protection de vos données : <strong>contact@bookeasey.fr</strong></p>
+          <p>Pour toute question relative à la protection de vos données : <strong>contact@slotybook.com</strong></p>
         </section>
       </div>
     </div>

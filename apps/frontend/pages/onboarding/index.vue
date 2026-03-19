@@ -78,7 +78,7 @@ async function submit() {
           </div>
         </div>
         <div v-if="currentStep === 4">
-          <h2 class="text-heading-1 text-slate-900 mb-1">Votre page est prête !</h2><p class="text-body text-slate-500 mb-6">Accessible à <span class="font-semibold text-brand-600">bookeasey.fr/{{ authStore.professional?.slug }}</span></p>
+          <h2 class="text-heading-1 text-slate-900 mb-1">Votre page est prête !</h2><p class="text-body text-slate-500 mb-6">Accessible à <span class="font-semibold text-brand-600">slotybook.com/{{ authStore.professional?.slug }}</span></p>
           <div class="p-5 bg-slate-50 rounded-xl space-y-3"><h3 class="text-heading-2 text-slate-900">{{ authStore.professional?.businessName }}</h3><p class="text-body-sm text-slate-500">{{ authStore.professional?.sector }}</p><div class="border-t border-slate-200 pt-3 space-y-2"><div v-for="(svc,i) in services.filter(s=>s.name.trim())" :key="i" class="flex items-center justify-between p-3 bg-white rounded-lg border border-slate-100"><div><p class="font-medium text-slate-800">{{ svc.name }}</p><p class="text-body-sm text-slate-400">{{ svc.durationMinutes }} min</p></div><span class="font-semibold text-brand-600">{{ svc.price }}€</span></div></div></div>
         </div>
         <div v-if="error" class="mt-6 p-3 rounded-lg bg-red-50 border border-red-100 text-sm text-red-600">{{ error }}</div>

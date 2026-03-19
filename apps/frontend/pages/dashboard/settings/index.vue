@@ -28,7 +28,7 @@ async function save() { loading.value = true; saved.value = false; await $api('/
     </div>
     <div class="card p-6">
       <h3 class="text-heading-2 text-slate-900 dark:text-white mb-3">Lien de réservation</h3>
-      <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-xl"><code class="text-body text-brand-600 flex-1">bookeasey.fr/{{ authStore.professional?.slug }}</code><button class="btn-secondary btn-sm" @click="navigator.clipboard.writeText(`${$config.public.appUrl}/${authStore.professional?.slug}`)">Copier</button></div>
+      <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-xl"><code class="text-body text-brand-600 flex-1">slotybook.com/{{ authStore.professional?.slug }}</code><button class="btn-secondary btn-sm" @click="navigator.clipboard.writeText(`${$config.public.appUrl}/${authStore.professional?.slug}`)">Copier</button></div>
     </div>
     <div class="card p-6">
       <h3 class="text-heading-2 text-slate-900 dark:text-white mb-3">Intégrations</h3>

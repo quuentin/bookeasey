@@ -1,5 +1,5 @@
 <template>
-  <MockBrowser url="bookeasey.fr/salon-marie">
+  <MockBrowser url="slotybook.com/salon-marie">
     <div>
       <!-- Cover -->
       <div class="h-16 sm:h-20" style="background: linear-gradient(135deg, #1f2533, #5b21b6)" />
@@ -75,7 +75,7 @@
           </div>
         </div>
 
-        <p class="text-[8px] text-slate-300 text-center mt-3">Propulsé par BookEasy</p>
+        <p class="text-[8px] text-slate-300 text-center mt-3">Propulsé par SlotyBook</p>
       </div>
     </div>
   </MockBrowser>

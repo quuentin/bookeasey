@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'default' })
-useHead({ title: 'Conditions Générales d\'Utilisation - BookEasy' })
+useHead({ title: 'Conditions Générales d\'Utilisation - SlotyBook' })
 </script>
 
 <template>
@@ -9,7 +9,7 @@ useHead({ title: 'Conditions Générales d\'Utilisation - BookEasy' })
       <div class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center">
         <NuxtLink to="/" class="flex items-center gap-2">
           <div class="w-7 h-7 rounded-md bg-brand-600 flex items-center justify-center"><span class="text-white font-bold text-xs">B</span></div>
-          <span class="font-bold text-slate-900">BookEasy</span>
+          <span class="font-bold text-slate-900">SlotyBook</span>
         </NuxtLink>
       </div>
     </nav>
@@ -21,13 +21,13 @@ useHead({ title: 'Conditions Générales d\'Utilisation - BookEasy' })
       <div class="prose prose-slate prose-sm max-w-none space-y-8 text-slate-600 leading-relaxed">
         <section>
           <h2 class="text-lg font-semibold text-slate-900">1. Objet</h2>
-          <p>Les présentes Conditions Générales d'Utilisation (ci-après "CGU") ont pour objet de définir les modalités et conditions d'utilisation de la plateforme BookEasy (ci-après "le Service"), éditée par la société Innov'Dev, EURL dont le siège social est situé au 200 Rue De La Croix Nivert, 75015 Paris.</p>
+          <p>Les présentes Conditions Générales d'Utilisation (ci-après "CGU") ont pour objet de définir les modalités et conditions d'utilisation de la plateforme SlotyBook (ci-après "le Service"), éditée par la société Innov'Dev, EURL dont le siège social est situé au 200 Rue De La Croix Nivert, 75015 Paris.</p>
           <p>L'inscription sur la plateforme implique l'acceptation pleine et entière des présentes CGU.</p>
         </section>
 
         <section>
           <h2 class="text-lg font-semibold text-slate-900">2. Description du Service</h2>
-          <p>BookEasy est une plateforme de prise de rendez-vous en ligne permettant aux professionnels indépendants de :</p>
+          <p>SlotyBook est une plateforme de prise de rendez-vous en ligne permettant aux professionnels indépendants de :</p>
           <ul>
             <li>Créer une page publique présentant leur activité et leurs services</li>
             <li>Gérer leur agenda et leurs disponibilités</li>
@@ -57,7 +57,7 @@ useHead({ title: 'Conditions Générales d\'Utilisation - BookEasy' })
           <h2 class="text-lg font-semibold text-slate-900">5. Paiements</h2>
           <p>Les paiements sont gérés par Stripe, prestataire de paiement sécurisé. Innov'Dev n'a jamais accès aux données bancaires des utilisateurs ni de leurs clients.</p>
           <p>L'abonnement Premium est facturé mensuellement. L'utilisateur peut résilier à tout moment depuis son espace, sans frais. La résiliation prend effet à la fin de la période en cours.</p>
-          <p>Les paiements encaissés par les professionnels via BookEasy (acomptes, paiements de prestations) sont versés directement sur leur compte Stripe. BookEasy ne prélève aucune commission sur ces transactions.</p>
+          <p>Les paiements encaissés par les professionnels via SlotyBook (acomptes, paiements de prestations) sont versés directement sur leur compte Stripe. SlotyBook ne prélève aucune commission sur ces transactions.</p>
         </section>
 
         <section>
@@ -74,13 +74,13 @@ useHead({ title: 'Conditions Générales d\'Utilisation - BookEasy' })
 
         <section>
           <h2 class="text-lg font-semibold text-slate-900">7. Responsabilité</h2>
-          <p>BookEasy est un outil de mise en relation. Innov'Dev n'est pas partie aux relations entre les professionnels et leurs clients. Innov'Dev ne saurait être tenue responsable des litiges pouvant survenir entre un professionnel et ses clients.</p>
+          <p>SlotyBook est un outil de mise en relation. Innov'Dev n'est pas partie aux relations entre les professionnels et leurs clients. Innov'Dev ne saurait être tenue responsable des litiges pouvant survenir entre un professionnel et ses clients.</p>
           <p>Innov'Dev s'engage à mettre en œuvre tous les moyens raisonnables pour assurer la disponibilité et le bon fonctionnement du Service, sans obligation de résultat.</p>
         </section>
 
         <section>
           <h2 class="text-lg font-semibold text-slate-900">8. Résiliation</h2>
-          <p>L'utilisateur peut supprimer son compte à tout moment en contactant le support à contact@bookeasey.fr. La suppression du compte entraîne la suppression de toutes les données associées dans un délai de 30 jours.</p>
+          <p>L'utilisateur peut supprimer son compte à tout moment en contactant le support à contact@slotybook.com. La suppression du compte entraîne la suppression de toutes les données associées dans un délai de 30 jours.</p>
           <p>Innov'Dev se réserve le droit de suspendre ou résilier tout compte en cas de non-respect des présentes CGU.</p>
         </section>
 
@@ -96,7 +96,7 @@ useHead({ title: 'Conditions Générales d\'Utilisation - BookEasy' })
 
         <section>
           <h2 class="text-lg font-semibold text-slate-900">11. Contact</h2>
-          <p>Pour toute question relative aux présentes CGU, vous pouvez nous contacter à l'adresse : <strong>contact@bookeasey.fr</strong></p>
+          <p>Pour toute question relative aux présentes CGU, vous pouvez nous contacter à l'adresse : <strong>contact@slotybook.com</strong></p>
         </section>
       </div>
     </div>

@@ -120,7 +120,7 @@ function generateCalendarUrl() {
 }
 
 useHead({
-  title: computed(() => profile.value ? `${profile.value.businessName} — Réserver en ligne` : 'BookEasy'),
+  title: computed(() => profile.value ? `${profile.value.businessName} — Réserver en ligne` : 'SlotyBook'),
   meta: [
     { name: 'description', content: computed(() => profile.value?.description || 'Réservez en ligne') },
   ],
@@ -500,7 +500,7 @@ useHead({
         <!-- Branding -->
         <div v-if="!profile.subscription || profile.subscription.plan === 'FREE'" class="text-center mt-10 mb-4">
           <p class="text-xs text-slate-400">
-            Propulsé par <NuxtLink to="/" class="text-brand-600 hover:text-brand-700 font-semibold transition-colors">BookEasy</NuxtLink>
+            Propulsé par <NuxtLink to="/" class="text-brand-600 hover:text-brand-700 font-semibold transition-colors">SlotyBook</NuxtLink>
             — <NuxtLink to="/register" class="text-slate-400 hover:text-brand-600 transition-colors">Créez votre page gratuitement</NuxtLink>
           </p>
         </div>

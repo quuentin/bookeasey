@@ -49,7 +49,7 @@ const showCreateModal = ref(false)
           <div class="flex items-center gap-2 shrink-0">
             <div class="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/10 border border-white/10 backdrop-blur-sm">
               <div class="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
-              <code class="text-sm text-white/70">bookeasey.fr/<span class="text-white font-medium">{{ authStore.professional?.slug }}</span></code>
+              <code class="text-sm text-white/70">slotybook.com/<span class="text-white font-medium">{{ authStore.professional?.slug }}</span></code>
             </div>
             <button
               :class="['px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all shrink-0', copied ? 'bg-emerald-400 text-emerald-900' : 'bg-white text-brand-700 hover:bg-white/90']"

@@ -17,7 +17,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'BookEasy — Prise de RDV en ligne',
+      title: 'SlotyBook — Prise de RDV en ligne',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

@@ -43,7 +43,7 @@ export function buildBookingConfirmationEmail(data: {
           <p style="margin: 4px 0;"><strong>Heure :</strong> ${data.time}</p>
           <p style="margin: 4px 0;"><strong>Chez :</strong> ${data.professionalName}</p>
         </div>
-        <p style="color: #94a3b8; font-size: 14px;">Propulsé par BookEasy</p>
+        <p style="color: #94a3b8; font-size: 14px;">Propulsé par SlotyBook</p>
       </div>
     `,
   }
@@ -69,7 +69,7 @@ export function buildReminderEmail(data: {
           <p style="margin: 4px 0;"><strong>Heure :</strong> ${data.time}</p>
           <p style="margin: 4px 0;"><strong>Chez :</strong> ${data.professionalName}</p>
         </div>
-        <p style="color: #94a3b8; font-size: 14px;">Propulsé par BookEasy</p>
+        <p style="color: #94a3b8; font-size: 14px;">Propulsé par SlotyBook</p>
       </div>
     `,
   }
