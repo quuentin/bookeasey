@@ -34,19 +34,19 @@ async function removeOverride(id: string) { if (!calendars.value?.length) return
           <div class="flex items-center justify-between mb-2 sm:mb-0">
             <div class="flex items-center gap-3">
               <AppToggle v-model="day.isActive" />
-              <span :class="['text-sm font-medium', day.isActive ? 'text-slate-800 dark:text-slate-100' : 'text-slate-400 dark:text-slate-500']">
+              <span :class="['text-sm font-medium', day.isActive ? 'text-slate-800 dark:text-slate-100' : 'text-slate-400']">
                 {{ dayNames[day.dayOfWeek] }}
               </span>
             </div>
-            <span v-if="!day.isActive" class="text-xs text-slate-400 dark:text-slate-500 sm:hidden">Fermé</span>
+            <span v-if="!day.isActive" class="text-xs text-slate-400 sm:hidden">Fermé</span>
           </div>
           <!-- Time inputs -->
           <div v-if="day.isActive" class="flex items-center gap-2 mt-2 sm:mt-0 sm:ml-14">
             <input v-model="day.startTime" type="time" class="input-field flex-1 sm:flex-none sm:w-28 text-sm" />
-            <span class="text-xs text-slate-400 dark:text-slate-500">à</span>
+            <span class="text-xs text-slate-400">à</span>
             <input v-model="day.endTime" type="time" class="input-field flex-1 sm:flex-none sm:w-28 text-sm" />
           </div>
-          <span v-if="!day.isActive" class="text-xs text-slate-400 dark:text-slate-500 hidden sm:block sm:ml-14">Fermé</span>
+          <span v-if="!day.isActive" class="text-xs text-slate-400 hidden sm:block sm:ml-14">Fermé</span>
         </div>
       </div>
 
@@ -94,16 +94,16 @@ async function removeOverride(id: string) { if (!calendars.value?.length) return
                 <p class="text-sm font-medium text-slate-800 dark:text-slate-100 truncate">
                   {{ new Date(o.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) }}
                 </p>
-                <p v-if="o.reason" class="text-xs text-slate-400 dark:text-slate-500 truncate">{{ o.reason }}</p>
+                <p v-if="o.reason" class="text-xs text-slate-400 truncate">{{ o.reason }}</p>
               </div>
             </div>
-            <button class="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-500/10 text-slate-400 dark:text-slate-500 hover:text-red-500 transition-colors shrink-0" @click="removeOverride(o.id)">
+            <button class="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-500/10 text-slate-400 hover:text-red-500 transition-colors shrink-0" @click="removeOverride(o.id)">
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           </div>
         </div>
         <div v-else class="text-center py-6">
-          <p class="text-xs text-slate-400 dark:text-slate-500">Aucun jour bloqué</p>
+          <p class="text-xs text-slate-400">Aucun jour bloqué</p>
         </div>
       </div>
     </div>

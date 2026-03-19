@@ -63,7 +63,7 @@ function handleLogout() {
 
       <!-- Main nav -->
       <nav class="flex-1 overflow-y-auto py-3 px-3">
-        <p class="px-3 mb-1.5 text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Principal</p>
+        <p class="px-3 mb-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Principal</p>
         <div class="space-y-0.5">
           <NuxtLink v-for="item in mainNav" :key="item.to" :to="item.to"
             :class="['flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all',
@@ -77,7 +77,7 @@ function handleLogout() {
 
         <!-- Premium features -->
         <div class="mt-5">
-          <p class="px-3 mb-1.5 text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Premium</p>
+          <p class="px-3 mb-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Premium</p>
           <div class="space-y-0.5">
             <NuxtLink v-for="item in premiumNav" :key="item.to" :to="item.to"
               :class="['flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all',
@@ -141,7 +141,7 @@ function handleLogout() {
         <!-- Right side -->
         <div class="flex items-center gap-2 shrink-0">
           <!-- Dark mode toggle (header) -->
-          <button class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 dark:text-slate-500 transition-colors hidden sm:block" @click="toggleDark">
+          <button class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 transition-colors hidden sm:block" @click="toggleDark">
             <svg v-if="isDark" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
             <svg v-else class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
           </button>
@@ -160,16 +160,16 @@ function handleLogout() {
               </div>
               <div class="hidden sm:block text-left">
                 <p class="text-xs font-medium text-slate-900 dark:text-white leading-none">{{ authStore.professional?.businessName }}</p>
-                <p class="text-[10px] text-slate-400 dark:text-slate-500 leading-none mt-0.5">{{ authStore.user?.email }}</p>
+                <p class="text-[10px] text-slate-400 leading-none mt-0.5">{{ authStore.user?.email }}</p>
               </div>
-              <svg class="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              <svg class="w-3.5 h-3.5 text-slate-300 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
             </button>
 
             <Transition name="dropdown">
               <div v-if="userMenuOpen" class="absolute right-0 mt-1.5 w-60 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-elevated py-1 z-50">
                 <div class="px-3 py-2.5 border-b border-slate-100 dark:border-slate-700">
                   <p class="text-sm font-semibold text-slate-900 dark:text-white truncate">{{ authStore.professional?.businessName }}</p>
-                  <p class="text-xs text-slate-400 dark:text-slate-500 truncate mt-0.5">{{ authStore.user?.email }}</p>
+                  <p class="text-xs text-slate-400 truncate mt-0.5">{{ authStore.user?.email }}</p>
                   <div class="mt-2">
                     <AppBadge :variant="authStore.isPremium ? 'brand' : 'neutral'" size="sm">{{ authStore.isPremium ? 'Premium' : 'Gratuit' }}</AppBadge>
                   </div>

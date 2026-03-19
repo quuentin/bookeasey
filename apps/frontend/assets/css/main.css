@@ -75,7 +75,7 @@
     @apply border-brand-400 shadow-input-focus;
   }
   :is(.dark .input-field) {
-    @apply text-slate-100 bg-slate-800 border-slate-700 placeholder-slate-500;
+    @apply text-slate-100 bg-slate-800 border-slate-700 placeholder-slate-400;
   }
   :is(.dark .input-field):hover {
     @apply border-slate-600;

@@ -76,7 +76,7 @@ const selectedDayApts = computed(() => aptsFor(selectedDay.value))
             'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700']"
           @click="selectedDay = d"
         >
-          <span class="text-[10px] uppercase" :class="isSelected(d) ? 'text-white/70' : 'text-slate-400 dark:text-slate-500'">{{ d.toLocaleDateString('fr-FR', { weekday: 'short' }).slice(0, 3) }}</span>
+          <span class="text-[10px] uppercase" :class="isSelected(d) ? 'text-white/70' : 'text-slate-400'">{{ d.toLocaleDateString('fr-FR', { weekday: 'short' }).slice(0, 3) }}</span>
           <span class="text-base font-bold mt-0.5">{{ d.getDate() }}</span>
           <span v-if="aptsFor(d).length" class="w-1.5 h-1.5 rounded-full mt-1" :class="isSelected(d) ? 'bg-white/70' : 'bg-brand-400'" />
         </button>
@@ -86,7 +86,7 @@ const selectedDayApts = computed(() => aptsFor(selectedDay.value))
       <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-xs overflow-hidden">
         <div class="px-4 py-3 border-b border-slate-100 dark:border-slate-700">
           <p class="text-sm font-semibold text-slate-900 dark:text-white capitalize">{{ fmtDayLong(selectedDay) }}</p>
-          <p class="text-xs text-slate-400 dark:text-slate-500">{{ selectedDayApts.length }} rendez-vous</p>
+          <p class="text-xs text-slate-400">{{ selectedDayApts.length }} rendez-vous</p>
         </div>
         <div v-if="selectedDayApts.length" class="divide-y divide-slate-50 dark:divide-slate-700">
           <NuxtLink v-for="a in selectedDayApts" :key="a.id" :to="`/dashboard/appointments/${a.id}`"
@@ -97,13 +97,13 @@ const selectedDayApts = computed(() => aptsFor(selectedDay.value))
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-slate-900 dark:text-white truncate">{{ a.clientName }}</p>
-              <p class="text-xs text-slate-400 dark:text-slate-500 truncate">{{ a.service?.name }}</p>
+              <p class="text-xs text-slate-400 truncate">{{ a.service?.name }}</p>
             </div>
-            <svg class="w-4 h-4 text-slate-300 dark:text-slate-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+            <svg class="w-4 h-4 text-slate-300 dark:text-slate-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
           </NuxtLink>
         </div>
         <div v-else class="py-10 text-center">
-          <p class="text-xs text-slate-400 dark:text-slate-500">Aucun rendez-vous ce jour</p>
+          <p class="text-xs text-slate-400">Aucun rendez-vous ce jour</p>
         </div>
       </div>
     </div>
@@ -118,7 +118,7 @@ const selectedDayApts = computed(() => aptsFor(selectedDay.value))
             <div v-for="d in weekDays" :key="d.toISOString()"
               :class="['p-2 text-center border-l border-slate-50 dark:border-slate-700',
                 isToday(d) ? 'bg-brand-50/50 dark:bg-brand-500/5' : '']">
-              <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase">{{ d.toLocaleDateString('fr-FR', { weekday: 'short' }).slice(0, 3) }}</p>
+              <p class="text-[10px] text-slate-400 uppercase">{{ d.toLocaleDateString('fr-FR', { weekday: 'short' }).slice(0, 3) }}</p>
               <p :class="['text-sm font-bold mt-0.5', isToday(d) ? 'text-brand-600' : 'text-slate-700 dark:text-slate-200']">{{ d.getDate() }}</p>
             </div>
           </div>
@@ -128,7 +128,7 @@ const selectedDayApts = computed(() => aptsFor(selectedDay.value))
             <!-- Hours column -->
             <div>
               <div v-for="h in hours" :key="h" class="h-[60px] border-b border-slate-50 dark:border-slate-700 px-1.5 py-0.5">
-                <span class="text-[10px] text-slate-400 dark:text-slate-500">{{ h }}h</span>
+                <span class="text-[10px] text-slate-400">{{ h }}h</span>
               </div>
             </div>
             <!-- Day columns -->

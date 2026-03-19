@@ -82,14 +82,14 @@ const showCreateModal = ref(false)
               <svg class="w-4 h-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
             </div>
             <h3 class="text-sm font-semibold text-slate-900 dark:text-white">Aujourd'hui</h3>
-            <span class="text-xs text-slate-400 dark:text-slate-500">{{ new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) }}</span>
+            <span class="text-xs text-slate-400">{{ new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) }}</span>
           </div>
           <div class="flex items-center gap-2">
             <button class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-brand-600 hover:bg-brand-50 dark:hover:bg-brand-500/10 transition-colors" @click="showCreateModal = true">
               <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
               Nouveau
             </button>
-            <NuxtLink to="/dashboard/appointments" class="flex items-center gap-1 text-xs text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
+            <NuxtLink to="/dashboard/appointments" class="flex items-center gap-1 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
               Tout voir
               <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
             </NuxtLink>
@@ -105,7 +105,7 @@ const showCreateModal = ref(false)
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-slate-900 dark:text-white truncate">{{ apt.clientName }}</p>
-              <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5 flex items-center gap-1.5">
+              <p class="text-xs text-slate-400 mt-0.5 flex items-center gap-1.5">
                 <span class="w-1.5 h-1.5 rounded-full shrink-0" :style="{ backgroundColor: apt.service?.color || '#7c3aed' }" />
                 {{ apt.service?.name }}
               </p>
@@ -115,10 +115,10 @@ const showCreateModal = ref(false)
         </div>
         <div v-else class="px-6 py-12 text-center">
           <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mx-auto mb-3">
-            <svg class="w-5 h-5 text-slate-400 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+            <svg class="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
           </div>
           <p class="text-sm text-slate-500 dark:text-slate-400 mb-1">Aucun rendez-vous aujourd'hui</p>
-          <p class="text-xs text-slate-400 dark:text-slate-500">Vos prochains RDV apparaîtront ici</p>
+          <p class="text-xs text-slate-400">Vos prochains RDV apparaîtront ici</p>
         </div>
       </div>
 
@@ -134,13 +134,13 @@ const showCreateModal = ref(false)
               class="flex items-center gap-3 px-5 py-2.5 hover:bg-slate-50/50 dark:hover:bg-slate-700/50 transition-colors">
               <div class="flex-1 min-w-0">
                 <p class="text-xs font-medium text-slate-900 dark:text-white truncate">{{ apt.clientName }}</p>
-                <p class="text-[11px] text-slate-400 dark:text-slate-500">{{ formatDate(apt.startTime) }} · {{ formatTime(apt.startTime) }}</p>
+                <p class="text-[11px] text-slate-400">{{ formatDate(apt.startTime) }} · {{ formatTime(apt.startTime) }}</p>
               </div>
               <span class="text-[11px] font-medium text-brand-600">{{ apt.service?.name }}</span>
             </NuxtLink>
           </div>
           <div v-else class="px-5 py-6 text-center">
-            <p class="text-xs text-slate-400 dark:text-slate-500">Rien de prévu</p>
+            <p class="text-xs text-slate-400">Rien de prévu</p>
           </div>
         </div>
 
@@ -154,19 +154,19 @@ const showCreateModal = ref(false)
               <div class="w-8 h-8 rounded-lg bg-brand-50 dark:bg-brand-500/10 flex items-center justify-center shrink-0 group-hover:bg-brand-100 dark:group-hover:bg-brand-500/20 transition-colors">
                 <svg class="w-4 h-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
               </div>
-              <div><p class="text-xs font-medium text-slate-900 dark:text-white">Nouveau service</p><p class="text-[11px] text-slate-400 dark:text-slate-500">Ajouter une prestation</p></div>
+              <div><p class="text-xs font-medium text-slate-900 dark:text-white">Nouveau service</p><p class="text-[11px] text-slate-400">Ajouter une prestation</p></div>
             </NuxtLink>
             <NuxtLink to="/dashboard/availability" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
               <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center shrink-0 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-500/20 transition-colors">
                 <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
               </div>
-              <div><p class="text-xs font-medium text-slate-900 dark:text-white">Disponibilités</p><p class="text-[11px] text-slate-400 dark:text-slate-500">Gérer vos horaires</p></div>
+              <div><p class="text-xs font-medium text-slate-900 dark:text-white">Disponibilités</p><p class="text-[11px] text-slate-400">Gérer vos horaires</p></div>
             </NuxtLink>
             <NuxtLink to="/dashboard/settings/integrations" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
               <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center shrink-0 group-hover:bg-blue-100 dark:group-hover:bg-blue-500/20 transition-colors">
                 <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
               </div>
-              <div><p class="text-xs font-medium text-slate-900 dark:text-white">Google Calendar</p><p class="text-[11px] text-slate-400 dark:text-slate-500">Synchroniser votre agenda</p></div>
+              <div><p class="text-xs font-medium text-slate-900 dark:text-white">Google Calendar</p><p class="text-[11px] text-slate-400">Synchroniser votre agenda</p></div>
             </NuxtLink>
           </div>
         </div>

@@ -81,7 +81,7 @@ async function handleUpgrade() {
           {{ loading ? 'Redirection...' : 'Souscrire à Premium' }}
         </button>
 
-        <div class="flex flex-wrap items-center justify-center gap-4 mt-4 text-xs text-slate-400 dark:text-slate-500">
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-4 text-xs text-slate-400">
           <span class="flex items-center gap-1">
             <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
             Sans engagement
