@@ -54,7 +54,7 @@ async function handleUpgrade() {
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
           <div v-for="(f, i) in premiumFeatures" :key="i" class="flex gap-3">
             <div class="w-9 h-9 rounded-lg bg-brand-50 dark:bg-brand-500/10 flex items-center justify-center shrink-0">
-              <svg class="w-4.5 h-4.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" :d="f.icon" /></svg>
+              <svg class="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" :d="f.icon" /></svg>
             </div>
             <div>
               <p class="text-sm font-semibold text-slate-900 dark:text-white">{{ f.title }}</p>
